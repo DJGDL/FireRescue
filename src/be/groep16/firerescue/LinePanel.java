@@ -14,7 +14,7 @@ public class LinePanel extends JPanel implements ActionListener
         JFrame f = new JFrame();
         f.setSize(500,500);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        f.setTitle("Lijnen tekenen");
+        f.setTitle("Brandweerman Tom");
         f.setLocation(100, 100); //standaard in de hoek van het scherm
         JPanel hoofdpaneel = new LinePanel();
         f.add(hoofdpaneel);

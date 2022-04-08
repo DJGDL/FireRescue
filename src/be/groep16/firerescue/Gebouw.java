@@ -10,19 +10,19 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class Brandweerman {
-	Brandweerman() 
+public class Gebouw{
+	Gebouw() 
 	 {
 	  try 
 	  {
 	   JFrame f = new JFrame("Gebouw");
 	   JPanel panel = new JPanel();
-	   panel.setBounds(0, 0, 57, 100);
-	   BufferedImage img = ImageIO.read(new File("brandweerman.png"));
+	   panel.setBounds(0, 0, 401, 660);
+	   BufferedImage img = ImageIO.read(new File("gebouw.png"));
 	   JLabel pic = new JLabel(new ImageIcon(img));
 	   panel.add(pic);
 	   f.add(panel);
-	   f.setSize(57, 100);
+	   f.setSize(401, 660);
 	   f.setLayout(null);
 	   f.setVisible(true);
 	  } 
@@ -30,6 +30,6 @@ public class Brandweerman {
 	 }
 	 public static void main(String args[]) 
 	 {
-	  new Brandweerman();
+	  new Gebouw();
 	 }
 }

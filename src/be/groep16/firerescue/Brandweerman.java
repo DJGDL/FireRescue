@@ -15,10 +15,10 @@ public class Brandweerman {
 	 {
 	  try 
 	  {
-	   JFrame f = new JFrame("Gebouw");
+	   JFrame f = new JFrame("Brandweerman");
 	   JPanel panel = new JPanel();
 	   panel.setBounds(0, 0, 57, 100);
-	   BufferedImage img = ImageIO.read(new File("brandweerman.png"));
+	   BufferedImage img = ImageIO.read(new File("bwm.png"));
 	   JLabel pic = new JLabel(new ImageIcon(img));
 	   panel.add(pic);
 	   f.add(panel);

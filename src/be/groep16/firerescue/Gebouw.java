@@ -28,8 +28,4 @@ public class Gebouw{
 	  } 
 	  catch (IOException e) {}
 	 }
-	 public static void main(String args[]) 
-	 {
-	  new Gebouw();
-	 }
 }

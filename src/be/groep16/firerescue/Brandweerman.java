@@ -31,8 +31,4 @@ public class Brandweerman {
 	  } 
 	  catch (IOException e) {}
 	 }
-	 public static void main(String args[]) 
-	 {
-	  new Brandweerman();
-	 }
 }

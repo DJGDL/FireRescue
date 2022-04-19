@@ -18,12 +18,15 @@ public class Brandweerman {
 	   JFrame f = new JFrame("Brandweerman");
 	   JPanel panel = new JPanel();
 	   panel.setBounds(0, 0, 57, 100);
-	   BufferedImage img = ImageIO.read(new File("bwm.png"));
+	   File bwm = new File("brandweerman.png");
+	   System.out.println(bwm.exists());
+	   BufferedImage img = ImageIO.read(bwm);
 	   JLabel pic = new JLabel(new ImageIcon(img));
 	   panel.add(pic);
 	   f.add(panel);
-	   f.setSize(57, 100);
-	   f.setLayout(null);
+	   //f.setSize(57, 100);
+	   //f.setLayout(null);
+	   f.pack();
 	   f.setVisible(true);
 	  } 
 	  catch (IOException e) {}

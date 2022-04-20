@@ -17,12 +17,12 @@ public class Gebouw{
 	  {
 	   JFrame f = new JFrame("Gebouw");
 	   JPanel panel = new JPanel();
-	   panel.setBounds(0, 0, 401, 660);
+	   panel.setBounds(0, 0, Variabelen.XG, Variabelen.YG);
 	   BufferedImage img = ImageIO.read(new File("gebouw.png"));
 	   JLabel pic = new JLabel(new ImageIcon(img));
 	   panel.add(pic);
 	   f.add(panel);
-	   f.setSize(401, 660);
+	   f.setSize(Variabelen.XG, Variabelen.YG);
 	   f.setLayout(null);
 	   f.setVisible(true);
 	  } 

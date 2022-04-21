@@ -17,8 +17,6 @@ public class LinePanel extends JPanel implements ActionListener
 
         f.setTitle("Brandweerman Sam");
 
-        f.setTitle("Brandweerman Tom");
-
         f.setLocation(100, 100); //standaard in de hoek van het scherm
         JPanel hoofdpaneel = new LinePanel();
         f.add(hoofdpaneel);

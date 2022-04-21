@@ -22,8 +22,6 @@ public class Brandweerman {
 			JLabel pic = new JLabel(new ImageIcon(img));
 			panel.add(pic);
 			f.add(panel);
-			// f.setSize(57, 100);
-			// f.setLayout(null);
 			f.pack();
 			f.setVisible(true);
 

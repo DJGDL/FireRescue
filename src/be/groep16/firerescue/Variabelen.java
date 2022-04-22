@@ -9,4 +9,6 @@ public class Variabelen {
 	public static final int YG = 660;//Hoogte gebouw
 	public static final int XB = 57;//Breedte brandweerman
 	public static final int YB = 100;//Hoogte brandweerman
+	
+	public static final int UPDATE_SPEED = 10; // ms
 }

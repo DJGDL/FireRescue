@@ -1,5 +1,6 @@
 package be.groep16.firerescue;
 
+import java.awt.Component;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -10,23 +11,39 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class Brandweerman {
+public class Brandweerman extends JPanel implements Entity {
+	private Vector positie;
+	
 	Brandweerman() {
+		positie = new Vector(0,0);
+		setBounds(0, 0, Variabelen.XB, Variabelen.YB);
+		File bwm = new File("brandweerman.png");
+
 		try {
-			JFrame f = new JFrame("Brandweerman");
-			JPanel panel = new JPanel();
-			panel.setBounds(0, 0, Variabelen.XB, Variabelen.YB);
-			File bwm = new File("brandweerman.png");
-			System.out.println(bwm.exists());
 			BufferedImage img = ImageIO.read(bwm);
 			JLabel pic = new JLabel(new ImageIcon(img));
-			panel.add(pic);
-			f.add(panel);
-			f.pack();
-			f.setVisible(true);
-
+			add(pic);
 		} catch (IOException e) {
+			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public void onUpdate(long deltaTime) {
+		positie = positie.add(1, 1);
+
+	}
+
+	@Override
+	public Component getComponent() {
+		
+		return this;
+	}
+
+	@Override
+	public Vector getPosition() {
+
+		return positie;
 	}
 
 }

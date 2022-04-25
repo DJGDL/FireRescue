@@ -17,9 +17,9 @@ public class Main extends JFrame implements ActionListener {
 		timer = new Timer(Variabelen.UPDATE_SPEED, this);
 		timer.start();
 		
-		Brandweerman b = new Brandweerman();
-		entities.add(b);
-		add(b);
+		Druppel d = new Druppel();
+		entities.add(d);
+		add(d);
 		
 		setVisible(true);
 	}

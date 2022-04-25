@@ -7,16 +7,15 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+@SuppressWarnings("serial")
 public class Brandweerman extends JPanel implements Entity {
 	private Vector positie;
-	
+
 	Brandweerman() {
-		positie = new Vector(0,0);
-		setBounds(0, 0, Variabelen.XB, Variabelen.YB);
+		positie = new Vector(0, 0);
 		File bwm = new File("brandweerman.png");
 
 		try {
@@ -36,7 +35,7 @@ public class Brandweerman extends JPanel implements Entity {
 
 	@Override
 	public Component getComponent() {
-		
+
 		return this;
 	}
 

@@ -15,7 +15,7 @@ public class Fire {
 		try {
 			JFrame f = new JFrame("Vuurbal");
 			JPanel panel = new JPanel();
-			panel.setBounds(0, 0, Variabelen.XB, Variabelen.YB);
+			panel.setBounds(0, 0, Variabelen.XF, -500);
 			File vuur = new File("brandweerman.png");
 			System.out.println(vuur.exists());
 			BufferedImage img = ImageIO.read(vuur);

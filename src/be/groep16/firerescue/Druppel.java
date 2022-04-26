@@ -13,9 +13,10 @@ import javax.swing.JPanel;
 @SuppressWarnings("serial")
 public class Druppel extends JPanel implements Entity {
 	private Vector positie;
+
 	Druppel() {
-		positie = new Vector(Variabelen.XD,Variabelen.Y);
-		
+		positie = new Vector(Variabelen.XD, Variabelen.Y);
+
 		File druppel = new File("Druppel.png");
 
 		try {
@@ -26,6 +27,7 @@ public class Druppel extends JPanel implements Entity {
 			e.printStackTrace();
 		}
 	}
+
 	@Override
 	public void onUpdate(long deltaTime) {
 		positie = positie.add(0, 1);
@@ -34,7 +36,7 @@ public class Druppel extends JPanel implements Entity {
 
 	@Override
 	public Component getComponent() {
-		
+
 		return this;
 	}
 

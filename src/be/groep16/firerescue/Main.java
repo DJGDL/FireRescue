@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.Timer;
 
+@SuppressWarnings("serial")
 public class Main extends JFrame implements ActionListener {
 	Timer timer;
 	ArrayList<Entity> entities;

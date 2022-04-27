@@ -1,27 +1,26 @@
 package be.groep16.firerescue;
 
-import java.awt.Component;
+import java.awt.Graphics;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 
-@SuppressWarnings("serial")
-public class Brandweerman extends JPanel implements Entity {
+public class Brandweerman implements Entity {
 	private Vector positie;
+	private BufferedImage image;
+	
+	private boolean keyLeft = false;
+	private boolean keyRight = false;
 
 	Brandweerman() {
 		positie = new Vector(0, 0);
 		File bwm = new File("brandweerman.png");
 
 		try {
-			BufferedImage img = ImageIO.read(bwm);
-			JLabel pic = new JLabel(new ImageIcon(img));
-			add(pic);
+			image = ImageIO.read(bwm);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -29,20 +28,34 @@ public class Brandweerman extends JPanel implements Entity {
 
 	@Override
 	public void onUpdate(long deltaTime) {
-		positie = positie.add(1, 1);
-
+		if (keyRight)
+			positie = positie.add(1, 0);
+		if (keyLeft)
+			positie = positie.add(-1, 0);
+	}
+	
+	public void onKeyDown(int keycode) {
+		if (keycode == KeyEvent.VK_LEFT) {
+			keyLeft = true;
+		}
+		if (keycode == KeyEvent.VK_RIGHT) {
+			keyRight = true;
+		}
+	}
+	
+	public void onKeyUp(int keycode) {
+		if (keycode == KeyEvent.VK_LEFT) {
+			keyLeft = false;
+		}
+		if (keycode == KeyEvent.VK_RIGHT) {
+			keyRight = false;
+		}
 	}
 
-	@Override
-	public Component getComponent() {
-
-		return this;
-	}
 
 	@Override
-	public Vector getPosition() {
-
-		return positie;
+	public void onDraw(Graphics g) {
+		g.drawImage(image, (int)positie.x(), (int)positie.y(), null);
 	}
 
 }

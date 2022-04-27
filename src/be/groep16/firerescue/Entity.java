@@ -1,10 +1,9 @@
 package be.groep16.firerescue;
 
-import java.awt.Component;
+
+import java.awt.Graphics;
 
 public interface Entity {
 	void onUpdate(long deltaTime);
-	Component getComponent();
-	Vector getPosition();
-	
+	void onDraw(Graphics g);	
 }

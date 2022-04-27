@@ -1,28 +1,23 @@
 package be.groep16.firerescue;
 
-import java.awt.Component;
+import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 
-@SuppressWarnings("serial")
-public class Druppel extends JPanel implements Entity {
+public class Druppel implements Entity {
 	private Vector positie;
+	private BufferedImage image;
 
 	Druppel() {
-		positie = new Vector(Variabelen.XD, Variabelen.Y);
+		positie = new Vector(0, 0);
 
 		File druppel = new File("Druppel.png");
 
 		try {
-			BufferedImage img = ImageIO.read(druppel);
-			JLabel pic = new JLabel(new ImageIcon(img));
-			add(pic);
+			image = ImageIO.read(druppel);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -35,14 +30,7 @@ public class Druppel extends JPanel implements Entity {
 	}
 
 	@Override
-	public Component getComponent() {
-
-		return this;
-	}
-
-	@Override
-	public Vector getPosition() {
-
-		return positie;
+	public void onDraw(Graphics g) {
+		g.drawImage(image, (int)(positie.x()), (int)(positie.y()), null);
 	}
 }

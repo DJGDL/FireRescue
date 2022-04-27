@@ -1,6 +1,6 @@
 package be.groep16.firerescue;
 
-import java.awt.Component;
+import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -34,14 +34,8 @@ public class Rock extends JPanel implements Entity {
 	}
 
 	@Override
-	public Component getComponent() {
-
-		return this;
-	}
-
-	@Override
-	public Vector getPosition() {
-
-		return positie;
+	public void onDraw(Graphics g) {
+		// TODO Auto-generated method stub
+		
 	}
 }

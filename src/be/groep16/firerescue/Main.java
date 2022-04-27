@@ -1,32 +1,49 @@
 package be.groep16.firerescue;
 
-import java.awt.Rectangle;
+import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.Timer;
 
 @SuppressWarnings("serial")
-public class Main extends JFrame implements ActionListener {
-	Timer timer;
-	ArrayList<Entity> entities;
+public class Main extends JPanel implements ActionListener, KeyListener {
+	private Timer timer;
+	private ArrayList<Entity> entities;
+	private Brandweerman player;
 	
 	public Main() {
 		entities = new ArrayList<>();
+		addKeyListener(this);
+		setFocusable(true);
 		timer = new Timer(Variabelen.UPDATE_SPEED, this);
 		timer.start();
 		
+		Fire f = new Fire();
+		entities.add(f);
 		Druppel d = new Druppel();
 		entities.add(d);
-		add(d);
+		Rock r = new Rock();
+		entities.add(r);
+		player = new Brandweerman();
+		entities.add(player);
 		
-		setVisible(true);
 	}
 
 	public static void main(String[] args) {
-		new Main();
+		JFrame frame = new JFrame();
+		frame.getContentPane().add(new Main());
+		
+		frame.setMinimumSize(new Dimension(500, 500));
+		frame.setResizable(false);
+		frame.setVisible(true);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	}
 
 	@Override
@@ -35,12 +52,34 @@ public class Main extends JFrame implements ActionListener {
 			entity.onUpdate(Variabelen.UPDATE_SPEED);
 		}
 		
+		repaint();
+	}
+
+	@Override
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		
 		for (Entity entity: entities) {
-			Rectangle bounds = entity.getComponent().getBounds();
-			bounds.x = entity.getPosition().x();
-			bounds.y = entity.getPosition().y();
-			entity.getComponent().setBounds(bounds);
+			entity.onDraw(g);
 		}
 	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		player.onKeyDown(e.getKeyCode());
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		player.onKeyUp(e.getKeyCode());
+	}
+	
+	
 
 }

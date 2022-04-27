@@ -1,31 +1,28 @@
 package be.groep16.firerescue;
 
-import java.awt.Component;
+import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 
-@SuppressWarnings("serial")
-public class Fire extends JPanel implements Entity {
+public class Fire implements Entity {
 	private Vector positie;
+	private BufferedImage image;
+
 	Fire() {
-		positie = new Vector(Variabelen.XF, Variabelen.Y);
+		positie = new Vector(0, 0);
 
 		File fire = new File("Vuurbal.png");
 
 		try {
-			BufferedImage img = ImageIO.read(fire);
-			JLabel pic = new JLabel(new ImageIcon(img));
-			add(pic);
+			image = ImageIO.read(fire);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
+
 	@Override
 	public void onUpdate(long deltaTime) {
 		positie = positie.add(0, 1);
@@ -33,14 +30,7 @@ public class Fire extends JPanel implements Entity {
 	}
 
 	@Override
-	public Component getComponent() {
-
-		return this;
-	}
-
-	@Override
-	public Vector getPosition() {
-
-		return positie;
+	public void onDraw(Graphics g) {
+		g.drawImage(image, (int)(positie.x()), (int)(positie.y()), null);
 	}
 }

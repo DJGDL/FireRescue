@@ -16,7 +16,7 @@ public class Brandweerman implements Entity {
 	private boolean keyRight = false;
 
 	Brandweerman() {
-		positie = new Vector(0, 0);
+		positie = new Vector(250, 300);
 		File bwm = new File("brandweerman.png");
 
 		try {

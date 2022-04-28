@@ -31,6 +31,9 @@ public class Druppel implements Entity {
 
 	@Override
 	public void onDraw(Graphics g) {
-		g.drawImage(image, (int)(positie.x()), (int)(positie.y()), null);
+		 g.drawImage(image,
+			       Variabelen.XD1, Variabelen.Y1, Variabelen.XD2, Variabelen.YD2,
+			       Variabelen.srcX1, Variabelen.srcY1, Variabelen.srcXD2, Variabelen.srcYD2,
+			       null);
 	}
 }

@@ -40,7 +40,7 @@ public class Main extends JPanel implements ActionListener, KeyListener {
 		JFrame frame = new JFrame();
 		frame.getContentPane().add(new Main());
 		
-		frame.setMinimumSize(new Dimension(500, 500));
+		frame.setMinimumSize(new Dimension(500, 790));
 		frame.setResizable(false);
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

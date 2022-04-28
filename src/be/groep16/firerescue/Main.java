@@ -46,6 +46,7 @@ public class Main extends JPanel implements ActionListener, KeyListener {
 		frame.setResizable(false);
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frame.setPreferredSize(new Dimension(Variabelen.BScherm, Variabelen.HScherm));
 	}
 
 	@Override

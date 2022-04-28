@@ -33,6 +33,8 @@ public class Main extends JPanel implements ActionListener, KeyListener {
 		entities.add(d);
 		Rock r = new Rock();
 		entities.add(r);
+		SmileDruppel sd = new SmileDruppel();
+		entities.add(sd);
 		player = new Brandweerman();
 		entities.add(player);
 		

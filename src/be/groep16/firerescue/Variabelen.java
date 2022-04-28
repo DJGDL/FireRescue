@@ -36,25 +36,31 @@ public class Variabelen {
 	/*
 	 * Coördinaten van de steen
 	 */
-	public static final int XR1 = rand.nextInt(BScherm - 2*BreedteR);
+	public static final int XR1 = rand.nextInt(BScherm - BreedteR);
 	public static final int XR2 = XR1 + BreedteR; 
 	public static final int YR1 = -HoogteR;
 	public static final int YR2 = 0;
 	public static final int srcXR2 = 1378;
 	public static final int srcYR2 = 1378;
 	/*
-	 * Coördinaten van de druppel
+	 * Coördinaten van de druppel en smile druppel
 	 */
-	public static final int XD1 = rand.nextInt(BScherm - 2*BreedteD);
+	public static final int XD1 = rand.nextInt(BScherm - BreedteD);
 	public static final int XD2 = XD1 + BreedteD;
 	public static final int YD1 = -HoogteD;
 	public static final int YD2 = 0;
 	public static final int srcXD2 = 133;
 	public static final int srcYD2 = 132;
+	public static final int XSD1 = rand.nextInt(BScherm - BreedteD);
+	public static final int XSD2 = XSD1 + BreedteD;
+	public static final int YSD1 = -HoogteD;
+	public static final int YSD2 = 0;
+	public static final int srcXSD2 = 890;
+	public static final int srcYSD2 = 890;
 	/*
 	 * Coördinaten van de vuurbal
 	 */
-	public static final int XF1 = rand.nextInt(BScherm - 2*BreedteF);
+	public static final int XF1 = rand.nextInt(BScherm - BreedteF);
 	public static final int XF2 = XF1 + BreedteF;
 	public static final int YF1 = -HoogteF;
 	public static final int YF2 = 0;

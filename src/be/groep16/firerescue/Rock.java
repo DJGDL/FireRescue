@@ -25,7 +25,7 @@ public class Rock implements Entity {
 
 	@Override
 	public void onUpdate(long deltaTime) {
-		positie = positie.add(0, 10);
+		positie = positie.add(0, 1);
 
 	}
 

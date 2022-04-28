@@ -17,8 +17,8 @@ public class Variabelen {
 	public static final int HoogteD = 33;
 	public static final int BreedteF = 33;
 	public static final int HoogteF = 43;
-	public static final int BreedteG = 500;
-	public static final int HoogteG = 760;
+	public static final int BreedteG = 440;
+	public static final int HoogteG = 700;
 	/*
 	 * Breedte en hoogte scherm
 	 */

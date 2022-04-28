@@ -55,8 +55,8 @@ public class Brandweerman implements Entity {
 
 	@Override
 	public void onDraw(Graphics g) {
-		g.drawImage(image, Variabelen.XB1 + (int) (positie.x()), Variabelen.YB1 + (int) (positie.y()),
-				Variabelen.XB2 + (int) (positie.x()), Variabelen.YB2 + (int) (positie.y()), Variabelen.srcX1,
+		g.drawImage(image, Variabelen.XB1 + (int) (positie.getX()), Variabelen.YB1 + (int) (positie.getY()),
+				Variabelen.XB2 + (int) (positie.getX()), Variabelen.YB2 + (int) (positie.getY()), Variabelen.srcX1,
 				Variabelen.srcY1, Variabelen.srcXB2, Variabelen.srcYB2, null);
 	}
 

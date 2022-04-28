@@ -29,8 +29,8 @@ public class Gebouw implements Entity {
 	}
 	@Override
 	public void onDraw(Graphics g) {
-		g.drawImage(image, Variabelen.XG1 + (int) (positie.x()), Variabelen.YG1 + (int) (positie.y()),
-				Variabelen.XG2 + (int) (positie.x()), Variabelen.YG2 + (int) (positie.y()), Variabelen.srcX1,
+		g.drawImage(image, Variabelen.XG1 + (int) (positie.getX()), Variabelen.YG1 + (int) (positie.getY()),
+				Variabelen.XG2 + (int) (positie.getX()), Variabelen.YG2 + (int) (positie.getY()), Variabelen.srcX1,
 				Variabelen.srcY1, Variabelen.srcXG2, Variabelen.srcYG2, null);
 
 	}

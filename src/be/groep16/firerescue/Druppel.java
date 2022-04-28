@@ -21,6 +21,7 @@ public class Druppel implements Entity {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
 	}
 
 	@Override
@@ -31,9 +32,9 @@ public class Druppel implements Entity {
 
 	@Override
 	public void onDraw(Graphics g) {
-		 g.drawImage(image,
-			       Variabelen.XD1, Variabelen.Y1, Variabelen.XD2, Variabelen.YD2,
-			       Variabelen.srcX1, Variabelen.srcY1, Variabelen.srcXD2, Variabelen.srcYD2,
-			       null);
+		g.drawImage(image, Variabelen.XD1 + (int) (positie.x()), Variabelen.YD1 + (int) (positie.y()),
+				Variabelen.XD2 + (int) (positie.x()), Variabelen.YD2 + (int) (positie.y()), Variabelen.srcX1,
+				Variabelen.srcY1, Variabelen.srcXD2, Variabelen.srcYD2, null);
+
 	}
 }

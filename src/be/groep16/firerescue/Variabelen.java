@@ -9,16 +9,20 @@ public class Variabelen {
 	 * Breedte en hoogte scherm
 	 */
 	public static final int BScherm = 500;
-	public static final int HScherm = 500;
+	public static final int HScherm = 700;
 	/*
 	 * Breedte en Hoogte van alle foto's op beeld
 	 */
-	public static final int BreedteR = 66;
-	public static final int HoogteR = 66;
+	public static final int BreedteR = 99;
+	public static final int HoogteR = 99;
 	public static final int BreedteD = 33;
 	public static final int HoogteD = 33;
 	public static final int BreedteF = 33;
 	public static final int HoogteF = 43;
+	public static final int BreedteB = 57;
+	public static final int HoogteB = 100;
+	public static final int BreedteG = 501;
+	public static final int HoogteG = 760;
 	/*
 	 * Coördinaten van de steen
 	 */
@@ -46,7 +50,15 @@ public class Variabelen {
 	public static final int YF2 = 0;
 	public static final int srcXF2 = 548;
 	public static final int srcYF2 = 720;
-	
+	/*
+	 * Coördinaten van het gebouw
+	 */
+	public static final int XG1 = 0;
+	public static final int XG2 = BreedteG;
+	public static final int YG1 = 0;
+	public static final int YG2 = HoogteG;
+	public static final int srcXG2 = 401;
+	public static final int srcYG2 = 660;
 	/*
 	 * Eerste coördinaat van elke gebruikte foto
 	 */

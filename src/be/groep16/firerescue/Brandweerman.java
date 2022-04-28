@@ -16,7 +16,7 @@ public class Brandweerman implements Entity {
 	private boolean keyRight = false;
 
 	Brandweerman() {
-		positie = new Vector(250, 300);
+		positie = new Vector(Variabelen.BScherm / 2, Variabelen.HScherm - Variabelen.HoogteB);
 		File bwm = new File("brandweerman.png");
 
 		try {

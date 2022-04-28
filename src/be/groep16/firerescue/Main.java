@@ -25,6 +25,8 @@ public class Main extends JPanel implements ActionListener, KeyListener {
 		timer = new Timer(Variabelen.UPDATE_SPEED, this);
 		timer.start();
 		
+		Gebouw gebouw = new Gebouw();
+		entities.add(gebouw);
 		Fire f = new Fire();
 		entities.add(f);
 		Druppel d = new Druppel();
@@ -40,7 +42,7 @@ public class Main extends JPanel implements ActionListener, KeyListener {
 		JFrame frame = new JFrame();
 		frame.getContentPane().add(new Main());
 		
-		frame.setMinimumSize(new Dimension(500, 790));
+		frame.setMinimumSize(new Dimension(Variabelen.BScherm, Variabelen.HScherm));
 		frame.setResizable(false);
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

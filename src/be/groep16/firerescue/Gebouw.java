@@ -1,17 +1,38 @@
 package be.groep16.firerescue;
 
+import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 
-public class Gebouw {
+public class Gebouw implements Entity {
+	private Vector positie;
+	private BufferedImage image;
+
 	Gebouw() {
-		
+		positie = new Vector(0, 0);
+
+		File gebouw = new File("gebouw.png");
+
+		try {
+			image = ImageIO.read(gebouw);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	@Override
+	public void onUpdate(long deltaTime) {
+		positie = positie.add(0, 0);
+
+	}
+	@Override
+	public void onDraw(Graphics g) {
+		g.drawImage(image, Variabelen.XG1 + (int) (positie.x()), Variabelen.YG1 + (int) (positie.y()),
+				Variabelen.XG2 + (int) (positie.x()), Variabelen.YG2 + (int) (positie.y()), Variabelen.srcX1,
+				Variabelen.srcY1, Variabelen.srcXG2, Variabelen.srcYG2, null);
+
 	}
 }
+

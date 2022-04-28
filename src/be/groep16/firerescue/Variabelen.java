@@ -5,24 +5,34 @@ import java.util.Random;
 public class Variabelen {
 	
 	static Random rand = new Random();
-	/*
-	 * Breedte en hoogte scherm
-	 */
-	public static final int BScherm = 500;
-	public static final int HScherm = 700;
+	
 	/*
 	 * Breedte en Hoogte van alle foto's op beeld
 	 */
+	public static final int BreedteB = 56;
+	public static final int HoogteB = 100;
 	public static final int BreedteR = 99;
 	public static final int HoogteR = 99;
 	public static final int BreedteD = 33;
 	public static final int HoogteD = 33;
 	public static final int BreedteF = 33;
 	public static final int HoogteF = 43;
-	public static final int BreedteB = 57;
-	public static final int HoogteB = 100;
-	public static final int BreedteG = 501;
+	public static final int BreedteG = 500;
 	public static final int HoogteG = 760;
+	/*
+	 * Breedte en hoogte scherm
+	 */
+	public static final int BScherm = BreedteG;
+	public static final int HScherm = HoogteG;
+	/*
+	 * Coördinaten Brandweerman
+	 */
+	public static final int XB1 = BScherm/2 - BreedteB/2;
+	public static final int XB2 = BScherm/2 + BreedteB/2;
+	public static final int YB1 = HScherm - HoogteB;
+	public static final int YB2 = HScherm;
+	public static final int srcXB2 = 57;
+	public static final int srcYB2 = 100;
 	/*
 	 * Coördinaten van de steen
 	 */

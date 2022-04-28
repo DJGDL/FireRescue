@@ -16,7 +16,7 @@ public class Brandweerman implements Entity {
 	private boolean keyRight = false;
 
 	Brandweerman() {
-		positie = new Vector(Variabelen.BScherm / 2, Variabelen.HScherm - Variabelen.HoogteB);
+		positie = new Vector(0,0);
 		File bwm = new File("brandweerman.png");
 
 		try {
@@ -55,7 +55,9 @@ public class Brandweerman implements Entity {
 
 	@Override
 	public void onDraw(Graphics g) {
-		g.drawImage(image, (int)positie.x(), (int)positie.y(), null);
+		g.drawImage(image, Variabelen.XB1 + (int) (positie.x()), Variabelen.YB1 + (int) (positie.y()),
+				Variabelen.XB2 + (int) (positie.x()), Variabelen.YB2 + (int) (positie.y()), Variabelen.srcX1,
+				Variabelen.srcY1, Variabelen.srcXB2, Variabelen.srcYB2, null);
 	}
 
 }

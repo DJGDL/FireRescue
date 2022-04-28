@@ -11,16 +11,16 @@ import javax.imageio.ImageIO;
 public class Brandweerman implements Entity {
 	private Vector positie;
 	private BufferedImage image;
-	
+
 	private boolean keyLeft = false;
 	private boolean keyRight = false;
 
 	Brandweerman() {
-		positie = new Vector(0,0);
+		positie = new Vector(0, 0);
 		File bwm = new File("brandweerman.png");
 
 		try {
-		 image = ImageIO.read(bwm);
+			image = ImageIO.read(bwm);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -28,13 +28,13 @@ public class Brandweerman implements Entity {
 
 	@Override
 	public void onUpdate(long deltaTime) {
-		if (keyRight && positie.getX()< ((Variabelen.BScherm/2) - (Variabelen.BreedteB/2)) )
+		if (keyRight && positie.getX() < ((Variabelen.BScherm / 2) - (Variabelen.BreedteB / 2)))
 			positie = positie.add(2, 0);
-		
-		if (keyLeft && positie.getX()>2-Variabelen.BScherm/2)
+
+		if (keyLeft && positie.getX() > 2 - Variabelen.BScherm / 2)
 			positie = positie.add(-2, 0);
 	}
-	
+
 	public void onKeyDown(int keycode) {
 		if (keycode == KeyEvent.VK_LEFT) {
 			keyLeft = true;
@@ -43,7 +43,7 @@ public class Brandweerman implements Entity {
 			keyRight = true;
 		}
 	}
-	
+
 	public void onKeyUp(int keycode) {
 		if (keycode == KeyEvent.VK_LEFT) {
 			keyLeft = false;
@@ -52,7 +52,6 @@ public class Brandweerman implements Entity {
 			keyRight = false;
 		}
 	}
-
 
 	@Override
 	public void onDraw(Graphics g) {

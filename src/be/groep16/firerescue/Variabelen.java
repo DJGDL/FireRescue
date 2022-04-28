@@ -3,9 +3,9 @@ package be.groep16.firerescue;
 import java.util.Random;
 
 public class Variabelen {
-	
+
 	static Random rand = new Random();
-	
+
 	/*
 	 * Breedte en Hoogte van alle foto's op beeld
 	 */
@@ -27,8 +27,8 @@ public class Variabelen {
 	/*
 	 * Coördinaten Brandweerman
 	 */
-	public static final int XB1 = BScherm/2 - BreedteB/2;
-	public static final int XB2 = BScherm/2 + BreedteB/2;
+	public static final int XB1 = BScherm / 2 - BreedteB / 2;
+	public static final int XB2 = BScherm / 2 + BreedteB / 2;
 	public static final int YB1 = HScherm - HoogteB;
 	public static final int YB2 = HScherm;
 	public static final int srcXB2 = 57;
@@ -37,7 +37,7 @@ public class Variabelen {
 	 * Coördinaten van de steen
 	 */
 	public static final int XR1 = rand.nextInt(BScherm - BreedteR);
-	public static final int XR2 = XR1 + BreedteR; 
+	public static final int XR2 = XR1 + BreedteR;
 	public static final int YR1 = -HoogteR;
 	public static final int YR2 = 0;
 	public static final int srcXR2 = 1378;
@@ -80,8 +80,6 @@ public class Variabelen {
 	 */
 	public static final int srcX1 = 0;
 	public static final int srcY1 = 0;
-	
-	
-	
+
 	public static final int UPDATE_SPEED = 10; // ms
 }

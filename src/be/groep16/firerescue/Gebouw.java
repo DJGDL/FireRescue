@@ -22,11 +22,13 @@ public class Gebouw implements Entity {
 			e.printStackTrace();
 		}
 	}
+
 	@Override
 	public void onUpdate(long deltaTime) {
 		positie = positie.add(0, 0);
 
 	}
+
 	@Override
 	public void onDraw(Graphics g) {
 		g.drawImage(image, Variabelen.XG1 + (int) (positie.getX()), Variabelen.YG1 + (int) (positie.getY()),
@@ -35,4 +37,3 @@ public class Gebouw implements Entity {
 
 	}
 }
-

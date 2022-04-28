@@ -29,9 +29,9 @@ public class Brandweerman implements Entity {
 	@Override
 	public void onUpdate(long deltaTime) {
 		if (keyRight)
-			positie = positie.add(1, 0);
+			positie = positie.add(2, 0);
 		if (keyLeft)
-			positie = positie.add(-1, 0);
+			positie = positie.add(-2, 0);
 	}
 	
 	public void onKeyDown(int keycode) {

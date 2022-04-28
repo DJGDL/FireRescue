@@ -20,7 +20,7 @@ public class Brandweerman implements Entity {
 		File bwm = new File("brandweerman.png");
 
 		try {
-			image = ImageIO.read(bwm);
+		 image = ImageIO.read(bwm);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -28,9 +28,10 @@ public class Brandweerman implements Entity {
 
 	@Override
 	public void onUpdate(long deltaTime) {
-		if (keyRight)
+		if (keyRight && positie.getX()< ((Variabelen.BScherm/2) - (Variabelen.BreedteB/2)) )
 			positie = positie.add(2, 0);
-		if (keyLeft)
+		
+		if (keyLeft && positie.getX()>2-Variabelen.BScherm/2)
 			positie = positie.add(-2, 0);
 	}
 	

@@ -43,14 +43,14 @@ public class Main extends JPanel implements ActionListener, KeyListener {
 	public static void main(String[] args) {
 		JFrame frame = new JFrame();
 		
-		JPanel mainPane = new Main();
-		frame.add(mainPane);
+		JPanel mainPanel = new Main();
+		frame.add(mainPanel);
 		
 		frame.setMinimumSize(new Dimension(Variabelen.BScherm, Variabelen.HScherm));
 		frame.setResizable(false);
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		mainPane.setPreferredSize(new Dimension(Variabelen.BScherm, Variabelen.HScherm));
+		mainPanel.setPreferredSize(new Dimension(Variabelen.BScherm, Variabelen.HScherm));
 		
 		frame.pack();
 	}

@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import java.util.Stack;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -16,7 +17,10 @@ import javax.swing.Timer;
 public class Main extends JPanel implements ActionListener, KeyListener {
 	private Timer timer;
 	private ArrayList<Entity> entities;
-	private Brandweerman player;
+	private Firefighter player;
+	private long prevTime;
+	
+
 
 	public Main() {
 		entities = new ArrayList<>();
@@ -25,19 +29,20 @@ public class Main extends JPanel implements ActionListener, KeyListener {
 		timer = new Timer(Variabelen.UPDATE_SPEED, this);
 		timer.start();
 
-		Gebouw gebouw = new Gebouw();
-		entities.add(gebouw);
-		Fire f = new Fire();
-		entities.add(f);
-		Druppel d = new Druppel();
-		entities.add(d);
-		Rock r = new Rock();
-		entities.add(r);
-		SmileDruppel sd = new SmileDruppel();
-		entities.add(sd);
-		player = new Brandweerman();
+		Building building = new Building();
+		entities.add(building);
+		Fire fire = new Fire();
+		entities.add(fire);
+		Droplet droplet = new Droplet();
+		entities.add(droplet);
+		Rock rock = new Rock();
+		entities.add(rock);
+		SmileDroplet smileDroplet = new SmileDroplet();
+		entities.add(smileDroplet);
+		player = new Firefighter();
 		entities.add(player);
 
+		prevTime = System.currentTimeMillis();
 	}
 
 	public static void main(String[] args) {
@@ -46,19 +51,23 @@ public class Main extends JPanel implements ActionListener, KeyListener {
 		JPanel mainPanel = new Main();
 		frame.add(mainPanel);
 
-		frame.setMinimumSize(new Dimension(Variabelen.BScherm, Variabelen.HScherm));
+		frame.setMinimumSize(new Dimension(Variabelen.BreedteScherm, Variabelen.HoogteScherm));
 		frame.setResizable(false);
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		mainPanel.setPreferredSize(new Dimension(Variabelen.BScherm, Variabelen.HScherm));
+		mainPanel.setPreferredSize(new Dimension(Variabelen.BreedteScherm, Variabelen.HoogteScherm));
 
 		frame.pack();
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		long currTime = System.currentTimeMillis();
+		long deltaTime = currTime - prevTime;
+		prevTime = currTime;
+		
 		for (Entity entity : entities) {
-			entity.onUpdate(Variabelen.UPDATE_SPEED);
+			entity.onUpdate(deltaTime);
 		}
 
 		repaint();

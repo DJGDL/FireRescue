@@ -7,17 +7,17 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class Gebouw implements Entity {
+public class Building implements Entity {
 	private Vector positie;
 	private BufferedImage image;
 
-	Gebouw() {
+	Building() {
 		positie = new Vector(0, 0);
 
-		File gebouw = new File("gebouw.png");
+		File building = new File("gebouw.png");
 
 		try {
-			image = ImageIO.read(gebouw);
+			image = ImageIO.read(building);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -31,9 +31,9 @@ public class Gebouw implements Entity {
 
 	@Override
 	public void onDraw(Graphics g) {
-		g.drawImage(image, Variabelen.XG1 + (int) (positie.getX()), Variabelen.YG1 + (int) (positie.getY()),
-				Variabelen.XG2 + (int) (positie.getX()), Variabelen.YG2 + (int) (positie.getY()), Variabelen.srcX1,
-				Variabelen.srcY1, Variabelen.srcXG2, Variabelen.srcYG2, null);
+		g.drawImage(image, Variabelen.XBuilding1 + (int) (positie.getX()), Variabelen.YBuilding1 + (int) (positie.getY()),
+				Variabelen.XBuilding2 + (int) (positie.getX()), Variabelen.YBuilding2 + (int) (positie.getY()), Variabelen.sourceX1,
+				Variabelen.sourceY1, Variabelen.sourceXBuilding2, Variabelen.sourceYBuilding2, null);
 
 	}
 }

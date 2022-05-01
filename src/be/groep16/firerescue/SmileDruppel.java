@@ -7,17 +7,17 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class Rock implements Entity {
+public class SmileDruppel implements Entity {
 	private Vector positie;
 	private BufferedImage image;
 
-	Rock() {
+	SmileDruppel() {
 		positie = new Vector(0, 0);
 
-		File rock = new File("Steen.png");
+		File smileDruppel = new File("Smile_Druppel.png");
 
 		try {
-			image = ImageIO.read(rock);
+			image = ImageIO.read(smileDruppel);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -31,9 +31,10 @@ public class Rock implements Entity {
 
 	@Override
 	public void onDraw(Graphics g) {
-		g.drawImage(image, Variabelen.XR1 + (int) (positie.getX()), Variabelen.YR1 + (int) (positie.getY()),
-				Variabelen.XR2 + (int) (positie.getX()), Variabelen.YR2 + (int) (positie.getY()), Variabelen.srcX1,
-				Variabelen.srcY1, Variabelen.srcXR2, Variabelen.srcYR2, null);
+		g.drawImage(image, Variabelen.XSD1 + (int) (positie.getX()), Variabelen.YSD1 + (int) (positie.getY()),
+				Variabelen.XSD2 + (int) (positie.getX()), Variabelen.YSD2 + (int) (positie.getY()), Variabelen.srcX1,
+				Variabelen.srcY1, Variabelen.srcXSD2, Variabelen.srcYSD2, null);
 
 	}
 }
+

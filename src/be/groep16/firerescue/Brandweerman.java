@@ -1,6 +1,8 @@
 package be.groep16.firerescue;
 
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -8,7 +10,8 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class Brandweerman implements Entity {
+@SuppressWarnings("unused")
+public class Brandweerman implements Entity{
 	private Vector positie;
 	private BufferedImage image;
 	
@@ -60,6 +63,7 @@ public class Brandweerman implements Entity {
 				Variabelen.XB2 + (int) (positie.getX()), Variabelen.YB2 + (int) (positie.getY()), Variabelen.srcX1,
 				Variabelen.srcY1, Variabelen.srcXB2, Variabelen.srcYB2, null);
 	}
+
 
 	//public void addActionListener(Main main) {
 		//if () {

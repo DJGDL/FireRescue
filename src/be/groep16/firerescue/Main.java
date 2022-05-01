@@ -23,7 +23,7 @@ public class Main extends JPanel implements ActionListener, KeyListener {
 	private Brandweerman player;
 	
 	int count = 0;
-	JLabel label;
+	JLabel score;
 
 	
 	public Main() {
@@ -46,30 +46,28 @@ public class Main extends JPanel implements ActionListener, KeyListener {
 		player = new Brandweerman();
 		entities.add(player);
 		
-		//player.addActionListener(this);
-		
 	}
 
 	public static void main(String[] args) {
 		JFrame frame = new JFrame();
-		JLabel label = new JLabel("score:");
+		JLabel score = new JLabel("score:");
 		JPanel mainPanel = new Main();
 		frame.add(mainPanel);
 		Border border = BorderFactory.createLineBorder(Color.black, 3);
 		
-		label.setBackground(Color.gray);
-		label.setOpaque(true);
-		label.setBorder(border);
-		label.setHorizontalAlignment(JLabel.LEFT);
-		label.setVerticalAlignment(JLabel.CENTER);
-		label.setBounds(5, 5, 75, 35);
+		score.setBackground(Color.gray);
+		score.setOpaque(true);
+		score.setBorder(border);
+		score.setHorizontalAlignment(JLabel.LEFT);
+		score.setVerticalAlignment(JLabel.CENTER);
+		score.setBounds(5, 5, 75, 35);
 		
 		frame.setMinimumSize(new Dimension(Variabelen.BScherm, Variabelen.HScherm));
 		frame.setResizable(false);
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		mainPanel.setPreferredSize(new Dimension(Variabelen.BScherm, Variabelen.HScherm));
-		mainPanel.add(label);
+		mainPanel.add(score);
 		mainPanel.setLayout(null);
 		frame.pack();
 	}

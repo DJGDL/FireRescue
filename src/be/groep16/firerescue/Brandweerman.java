@@ -61,4 +61,14 @@ public class Brandweerman implements Entity {
 				Variabelen.srcY1, Variabelen.srcXB2, Variabelen.srcYB2, null);
 	}
 
+	public void addActionListener(Main main) {
+		if () {
+			
+		}
+	
+		
+	}
+
+
+
 }

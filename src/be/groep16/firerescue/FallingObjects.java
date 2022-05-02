@@ -19,7 +19,7 @@ public class FallingObjects {
  // return false;
 //}
 
-..if (e// instanceof Droplet && !e.visible()) { // only invisible Balls will be removed
+//..if (e// instanceof Droplet && !e.visible()) { // only invisible Balls will be removed
  // gameElements.remove(e);
  // System.out.println("Ball removed");
  // break; // stop the loop

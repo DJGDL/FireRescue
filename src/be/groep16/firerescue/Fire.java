@@ -31,9 +31,9 @@ public class Fire implements Entity {
 
 	@Override
 	public void onDraw(Graphics g) {
-		g.drawImage(image, Variabelen.XF1 + (int) (positie.getX()), Variabelen.YF1 + (int) (positie.getY()),
-				Variabelen.XF2 + (int) (positie.getX()), Variabelen.YF2 + (int) (positie.getY()), Variabelen.srcX1,
-				Variabelen.srcY1, Variabelen.srcXF2, Variabelen.srcYF2, null);
+		g.drawImage(image, Variabelen.XFire1 + (int) (positie.getX()), Variabelen.YFire1 + (int) (positie.getY()),
+				Variabelen.XFire2 + (int) (positie.getX()), Variabelen.YFire2 + (int) (positie.getY()), Variabelen.sourceX1,
+				Variabelen.sourceY1, Variabelen.sourceXFire2, Variabelen.sourceYFire2, null);
 
 	}
 }

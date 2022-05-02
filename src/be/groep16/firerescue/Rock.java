@@ -31,9 +31,9 @@ public class Rock implements Entity {
 
 	@Override
 	public void onDraw(Graphics g) {
-		g.drawImage(image, Variabelen.XR1 + (int) (positie.getX()), Variabelen.YR1 + (int) (positie.getY()),
-				Variabelen.XR2 + (int) (positie.getX()), Variabelen.YR2 + (int) (positie.getY()), Variabelen.srcX1,
-				Variabelen.srcY1, Variabelen.srcXR2, Variabelen.srcYR2, null);
+		g.drawImage(image, Variabelen.XRock1 + (int) (positie.getX()), Variabelen.YRock1 + (int) (positie.getY()),
+				Variabelen.XRock2 + (int) (positie.getX()), Variabelen.YRock2 + (int) (positie.getY()), Variabelen.sourceX1,
+				Variabelen.sourceY1, Variabelen.sourceXRock2, Variabelen.sourceYRock2, null);
 
 	}
 }

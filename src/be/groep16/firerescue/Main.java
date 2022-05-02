@@ -22,6 +22,7 @@ public class Main extends JPanel implements ActionListener, KeyListener {
 	private Timer timer;
 	private long prevTime;
 	private Firefighter player;
+	private Entity entities;
 	
 	int count = 0;
 	JLabel score;
@@ -31,7 +32,7 @@ public class Main extends JPanel implements ActionListener, KeyListener {
 		setFocusable(true);
 		timer = new Timer(Variabelen.UPDATE_SPEED, this);
 		timer.start();
-
+		
 		Building building = new Building();
 		entities.add(building);
 		Fire fire = new Fire();

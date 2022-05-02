@@ -1,5 +1,6 @@
 package be.groep16.firerescue;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
@@ -9,9 +10,12 @@ import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.Stack;
 
+import javax.swing.BorderFactory;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+import javax.swing.border.Border;
 
 @SuppressWarnings("serial")
 public class Main extends JPanel implements ActionListener, KeyListener {
@@ -20,11 +24,11 @@ public class Main extends JPanel implements ActionListener, KeyListener {
 	private Firefighter player;
 	private long prevTime;
 	
-<<<<<<< HEAD
+
 	int count = 0;
 	JLabel score;
-=======
->>>>>>> parent of 3b7adf4 (Revert "Merge branch 'master' of https://github.com/DJGDL/FireRescue")
+
+
 
 
 	public Main() {
@@ -46,17 +50,14 @@ public class Main extends JPanel implements ActionListener, KeyListener {
 		entities.add(smileDroplet);
 		player = new Firefighter();
 		entities.add(player);
-<<<<<<< HEAD
-		
-=======
 
-		prevTime = System.currentTimeMillis();
->>>>>>> parent of 3b7adf4 (Revert "Merge branch 'master' of https://github.com/DJGDL/FireRescue")
 	}
+		
+
 
 	public static void main(String[] args) {
 		JFrame frame = new JFrame();
-<<<<<<< HEAD
+
 		JLabel score = new JLabel("score:");
 		JPanel mainPanel = new Main();
 		frame.add(mainPanel);
@@ -69,25 +70,18 @@ public class Main extends JPanel implements ActionListener, KeyListener {
 		score.setVerticalAlignment(JLabel.CENTER);
 		score.setBounds(5, 5, 75, 35);
 		
-		frame.setMinimumSize(new Dimension(Variabelen.BScherm, Variabelen.HScherm));
-		frame.setResizable(false);
-		frame.setVisible(true);
-		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		mainPanel.setPreferredSize(new Dimension(Variabelen.BScherm, Variabelen.HScherm));
-		mainPanel.add(score);
-		mainPanel.setLayout(null);
-=======
-
-		JPanel mainPanel = new Main();
-		frame.add(mainPanel);
-
 		frame.setMinimumSize(new Dimension(Variabelen.BreedteScherm, Variabelen.HoogteScherm));
 		frame.setResizable(false);
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		mainPanel.setPreferredSize(new Dimension(Variabelen.BreedteScherm, Variabelen.HoogteScherm));
+		mainPanel.add(score);
+		mainPanel.setLayout(null);
 
->>>>>>> parent of 3b7adf4 (Revert "Merge branch 'master' of https://github.com/DJGDL/FireRescue")
+
+		
+
+
 		frame.pack();
 	}
 

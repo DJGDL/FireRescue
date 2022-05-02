@@ -78,12 +78,10 @@ public class Main extends JPanel implements ActionListener, KeyListener {
 		mainPanel.add(score);
 		mainPanel.setLayout(null);
 
-
-		
-
-
 		frame.pack();
 	}
+	
+	
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -122,5 +120,7 @@ public class Main extends JPanel implements ActionListener, KeyListener {
 	public void keyReleased(KeyEvent e) {
 		player.onKeyUp(e.getKeyCode());
 	}
+	
+	
 
 }

@@ -40,4 +40,6 @@ public class Droplet implements Entity {
 				Variabelen.sourceY1, Variabelen.sourceXDroplet2, Variabelen.sourceYDroplet2, null);
 
 	}
+
+
 }

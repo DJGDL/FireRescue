@@ -14,7 +14,7 @@ public class GameManager {
 	private ArrayList<ArrayList<Entity>> activeEntity;
 	private ArrayList<Stack<Entity>> nonActiveEntity;
 	
-	private Firefighter player;
+	
 
 	private int object;
 	

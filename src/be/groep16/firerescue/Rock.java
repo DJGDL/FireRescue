@@ -8,7 +8,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class Rock implements Entity {
-	private BufferedImage image;
+	private static BufferedImage image;
 
 	public static final int YRock1 = -Variabelen.HoogteRock;
 	public static final int YRock2 = 0;

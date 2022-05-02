@@ -8,7 +8,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class Fire implements Entity {
-	private BufferedImage image;
+	private static BufferedImage image;
 	private static final int YFire1 = -Variabelen.HoogteFire;
 	private static final int YFire2 = 0;
 	private static final int sourceXFire2 = 548;

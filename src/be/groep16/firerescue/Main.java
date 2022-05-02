@@ -21,6 +21,7 @@ import javax.swing.border.Border;
 public class Main extends JPanel implements ActionListener, KeyListener {
 	private Timer timer;
 	private long prevTime;
+	private Firefighter player;
 	
 	int count = 0;
 	JLabel score;

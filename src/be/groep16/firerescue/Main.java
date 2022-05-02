@@ -1,6 +1,5 @@
 package be.groep16.firerescue;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
@@ -8,48 +7,56 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import java.util.Stack;
 
-import javax.swing.BorderFactory;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
-import javax.swing.border.Border;
 
 @SuppressWarnings("serial")
 public class Main extends JPanel implements ActionListener, KeyListener {
 	private Timer timer;
 	private ArrayList<Entity> entities;
-	private Brandweerman player;
+	private Firefighter player;
+	private long prevTime;
 	
+<<<<<<< HEAD
 	int count = 0;
 	JLabel score;
+=======
+>>>>>>> parent of 3b7adf4 (Revert "Merge branch 'master' of https://github.com/DJGDL/FireRescue")
 
-	
+
 	public Main() {
 		entities = new ArrayList<>();
 		addKeyListener(this);
 		setFocusable(true);
 		timer = new Timer(Variabelen.UPDATE_SPEED, this);
 		timer.start();
-		
-		Gebouw gebouw = new Gebouw();
-		entities.add(gebouw);
-		Fire f = new Fire();
-		entities.add(f);
-		Druppel d = new Druppel();
-		entities.add(d);
-		Rock r = new Rock();
-		entities.add(r);
-		SmileDruppel sd = new SmileDruppel();
-		entities.add(sd);
-		player = new Brandweerman();
+
+		Building building = new Building();
+		entities.add(building);
+		Fire fire = new Fire();
+		entities.add(fire);
+		Droplet droplet = new Droplet();
+		entities.add(droplet);
+		Rock rock = new Rock();
+		entities.add(rock);
+		SmileDroplet smileDroplet = new SmileDroplet();
+		entities.add(smileDroplet);
+		player = new Firefighter();
 		entities.add(player);
+<<<<<<< HEAD
 		
+=======
+
+		prevTime = System.currentTimeMillis();
+>>>>>>> parent of 3b7adf4 (Revert "Merge branch 'master' of https://github.com/DJGDL/FireRescue")
 	}
 
 	public static void main(String[] args) {
 		JFrame frame = new JFrame();
+<<<<<<< HEAD
 		JLabel score = new JLabel("score:");
 		JPanel mainPanel = new Main();
 		frame.add(mainPanel);
@@ -69,27 +76,39 @@ public class Main extends JPanel implements ActionListener, KeyListener {
 		mainPanel.setPreferredSize(new Dimension(Variabelen.BScherm, Variabelen.HScherm));
 		mainPanel.add(score);
 		mainPanel.setLayout(null);
+=======
+
+		JPanel mainPanel = new Main();
+		frame.add(mainPanel);
+
+		frame.setMinimumSize(new Dimension(Variabelen.BreedteScherm, Variabelen.HoogteScherm));
+		frame.setResizable(false);
+		frame.setVisible(true);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		mainPanel.setPreferredSize(new Dimension(Variabelen.BreedteScherm, Variabelen.HoogteScherm));
+
+>>>>>>> parent of 3b7adf4 (Revert "Merge branch 'master' of https://github.com/DJGDL/FireRescue")
 		frame.pack();
 	}
-	
-	//public void actionPerformed2(ActionEvent main) {
-		//label.setText("Score: " + count);
-	//}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		for (Entity entity: entities) {
-			entity.onUpdate(Variabelen.UPDATE_SPEED);
-		}
+		long currTime = System.currentTimeMillis();
+		long deltaTime = currTime - prevTime;
+		prevTime = currTime;
 		
+		for (Entity entity : entities) {
+			entity.onUpdate(deltaTime);
+		}
+
 		repaint();
 	}
 
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		
-		for (Entity entity: entities) {
+
+		for (Entity entity : entities) {
 			entity.onDraw(g);
 		}
 	}
@@ -97,7 +116,7 @@ public class Main extends JPanel implements ActionListener, KeyListener {
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -109,7 +128,5 @@ public class Main extends JPanel implements ActionListener, KeyListener {
 	public void keyReleased(KeyEvent e) {
 		player.onKeyUp(e.getKeyCode());
 	}
-	
-	
 
 }

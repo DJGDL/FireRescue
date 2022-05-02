@@ -1,109 +1,84 @@
 package be.groep16.firerescue;
 
+import java.awt.Graphics;
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Stack;
 
 public class GameManager {
-	private Stack<Droplet> activeDroplet;
-	private Stack<Droplet> nonActiveDroplet;
-	private Stack<Fire> activeFire;
-	private Stack<Fire> nonActiveFire;
-	private Stack<Rock> activeRock;
-	private Stack<Rock> nonActiveRock;
-	private Stack<SmileDroplet> activeSmileDroplet;
-	private Stack<SmileDroplet> nonActiveSmileDroplet;
+	private static final int ROCK_ID = 0;
+	private static final int FIRE_ID = 1;
+	private static final int DROPLET_ID = 2;
+	private static final int SMILE_DROPLET_ID = 3;
+	
+	private ArrayList<ArrayList<Entity>> activeEntity;
+	private ArrayList<Stack<Entity>> nonActiveEntity;
+	
+	private Firefighter player;
+
 	private int object;
 	
 	
-	private Droplet getNewDroplet() {
-		if (nonActiveDroplet.size() > 0) {
-			Droplet newDroplet = nonActiveDroplet.pop();
-			activeDroplet.push(newDroplet);
+	private Entity getNewEntity(int id) {
+		if (nonActiveEntity.get(id).size() > 0) {
+			Entity entity = nonActiveEntity.get(id).pop();
+			entity.reset();
 			
-			return newDroplet;
+			activeEntity.get(id).add(entity);
+			
+			return entity;
 		} else {
-			Droplet newDroplet = new Droplet();
-			activeDroplet.push(newDroplet);
+			Entity entity = switch (id) {
+				case ROCK_ID -> new Rock();
+				case FIRE_ID -> new Fire();
+				case DROPLET_ID -> new Droplet();
+				case SMILE_DROPLET_ID -> new SmileDroplet();
+				default -> throw new IllegalArgumentException("Unexpected value: " + id);
+			};
+			activeEntity.get(id).add(entity);
 			
-			return newDroplet;
-		}
-	}
-	private Fire getNewFire() {
-		if (nonActiveFire.size() > 0) {
-			Fire newFire = nonActiveFire.pop();
-			activeFire.push(newFire);
-			
-			return newFire;
-		} else {
-			Fire newFire = new Fire();
-			activeFire.push(newFire);
-			
-			return newFire;
-		}
-	}
-	private Rock getNewRock() {
-		if (nonActiveRock.size() > 0) {
-			Rock newRock = nonActiveRock.pop();
-			activeRock.push(newRock);
-			
-			return newRock;
-		} else {
-			Rock newRock = new Rock();
-			activeRock.push(newRock);
-			
-			return newRock;
-		}
-	}
-	private SmileDroplet getNewSmileDroplet() {
-		if (nonActiveSmileDroplet.size() > 0) {
-			SmileDroplet newSmileDroplet = nonActiveSmileDroplet.pop();
-			activeSmileDroplet.push(newSmileDroplet);
-			
-			return newSmileDroplet;
-		} else {
-			SmileDroplet newSmileDroplet = new SmileDroplet();
-			activeSmileDroplet.push(newSmileDroplet);
-			
-			return newSmileDroplet;
+			return entity;
 		}
 	}
 	public GameManager() {
-		activeDroplet = new Stack<>();
-		nonActiveDroplet = new Stack<>();
-		activeFire = new Stack<>();
-		nonActiveFire = new Stack<>();
-		activeRock = new Stack<>();
-		nonActiveRock = new Stack<>();
-		activeSmileDroplet = new Stack<>();
-		nonActiveSmileDroplet = new Stack<>();
+		activeEntity = new ArrayList<>();
+		nonActiveEntity = new ArrayList<>();
+		
+		for (int id = 0; id < 4; id++) {
+			activeEntity.set(id, new ArrayList<>());
+			nonActiveEntity.set(id, new Stack<>());
+		}
 	}
 	
 	public void onUpdate(long deltaTime) {
 		Random rand = new Random();
 		object = rand.nextInt()%10;
 		if (object < 5)
-			getNewRock();
+			getNewEntity(ROCK_ID);
 		if (object >= 5 && object < 7)
-			getNewFire();
+			getNewEntity(FIRE_ID);
 		if (object >= 7 && object <9)
-			getNewDroplet();
+			getNewEntity(DROPLET_ID);
 		if (object >= 9)
-			getNewSmileDroplet();
-		for (Droplet droplet: activeDroplet) {
-			droplet.onUpdate(deltaTime);
+			getNewEntity(SMILE_DROPLET_ID);
+		
+		for (int id = 0; id < activeEntity.size(); id++) {
+			for (Entity e: activeEntity.get(id)) {
+				e.onUpdate(deltaTime);
+				
+				if (e.isDead()) {
+					activeEntity.get(id).remove(e);		
+				}
+			}
 		}
-		for (Fire fire: activeFire) {
-			fire.onUpdate(deltaTime);
-		}
-		for (Rock rock: activeRock) {
-			rock.onUpdate(deltaTime);
-		}
-		for (SmileDroplet smileDroplet: activeSmileDroplet) {
-			smileDroplet.onUpdate(deltaTime);
-		}
+		
 	}
 	
-	public void onDraw() {
-		//
+	public void onDraw(Graphics g) {
+		for (int id = 0; id < activeEntity.size(); id++) {
+			for (Entity e: activeEntity.get(id)) {
+				e.onDraw(g);
+			}
+		}
 	}
 }

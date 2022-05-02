@@ -20,19 +20,12 @@ import javax.swing.border.Border;
 @SuppressWarnings("serial")
 public class Main extends JPanel implements ActionListener, KeyListener {
 	private Timer timer;
-	private ArrayList<Entity> entities;
-	private Firefighter player;
 	private long prevTime;
 	
-
 	int count = 0;
 	JLabel score;
 
-
-
-
 	public Main() {
-		entities = new ArrayList<>();
 		addKeyListener(this);
 		setFocusable(true);
 		timer = new Timer(Variabelen.UPDATE_SPEED, this);

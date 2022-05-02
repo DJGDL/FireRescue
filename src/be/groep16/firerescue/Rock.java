@@ -8,8 +8,16 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class Rock implements Entity {
-	private Vector positie;
 	private BufferedImage image;
+
+	public static final int YRock1 = -Variabelen.HoogteRock;
+	public static final int YRock2 = 0;
+	public static final int sourceXRock2 = 1378;
+	public static final int sourceYRock2 = 1378;
+
+	private int xRock1 = 0;
+	private int xRock2 = 0;
+	private Vector positie;
 
 	Rock() {
 		positie = new Vector(0, 0);
@@ -31,9 +39,20 @@ public class Rock implements Entity {
 
 	@Override
 	public void onDraw(Graphics g) {
-		g.drawImage(image, Variabelen.XRock1 + (int) (positie.getX()), Variabelen.YRock1 + (int) (positie.getY()),
-				Variabelen.XRock2 + (int) (positie.getX()), Variabelen.YRock2 + (int) (positie.getY()), Variabelen.sourceX1,
-				Variabelen.sourceY1, Variabelen.sourceXRock2, Variabelen.sourceYRock2, null);
+		g.drawImage(image, xRock1 + (int) (positie.getX()), YRock1 + (int) (positie.getY()),
+				xRock2 + (int) (positie.getX()), YRock2 + (int) (positie.getY()), Variabelen.sourceX1,
+				Variabelen.sourceY1, sourceXRock2, sourceYRock2, null);
 
+	}
+
+	public void reset() {
+		xRock1 = Variabelen.RANDOM.nextInt(Variabelen.BreedteScherm - Variabelen.BreedteRock);
+		xRock2 = xRock1 + Variabelen.BreedteRock;
+
+		positie = new Vector(0, 0);
+	}
+
+	public boolean isDead() {
+		return positie.getY() > Variabelen.HoogteScherm + 1;
 	}
 }

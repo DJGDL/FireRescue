@@ -8,32 +8,52 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class SmileDroplet implements Entity {
+	private static BufferedImage image = null;
+
+	private static final int ySmileDroplet1 = -Variabelen.HoogteDroplet;
+	private static final int ySmileDroplet2 = 0;
+	private static final int sourceXSmileDroplet2 = 890;
+	private static final int sourceYSmileDroplet2 = 890;
+
+	private int xSmileDroplet1 = 0;
+	private int xSmileDroplet2 = 0;
 	private Vector positie;
-	private BufferedImage image;
 
 	SmileDroplet() {
-		positie = new Vector(0, 0);
+		reset();
 
-		File smileDroplet = new File("Smile_Druppel.png");
+		if (image == null) {
+			File smileDroplet = new File("Smile_Druppel.png");
 
-		try {
-			image = ImageIO.read(smileDroplet);
-		} catch (IOException e) {
-			e.printStackTrace();
+			try {
+				image = ImageIO.read(smileDroplet);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
 	@Override
 	public void onUpdate(long deltaTime) {
 		positie = positie.add(0, 1);
-
 	}
 
 	@Override
 	public void onDraw(Graphics g) {
-		g.drawImage(image, Variabelen.XSmileDroplet1 + (int) (positie.getX()), Variabelen.YSmileDroplet1 + (int) (positie.getY()),
-				Variabelen.XSmileDroplet2 + (int) (positie.getX()), Variabelen.YSmileDroplet2 + (int) (positie.getY()), Variabelen.sourceX1,
-				Variabelen.sourceY1, Variabelen.sourceXSmileDroplet2, Variabelen.sourceYSmileDroplet2, null);
+		g.drawImage(image, xSmileDroplet1 + (int) (positie.getX()), ySmileDroplet1 + (int) (positie.getY()),
+				xSmileDroplet2 + (int) (positie.getX()), ySmileDroplet2 + (int) (positie.getY()), Variabelen.sourceX1,
+				Variabelen.sourceY1, sourceXSmileDroplet2, sourceYSmileDroplet2, null);
 
+	}
+
+	public void reset() {
+		xSmileDroplet1 = Variabelen.RANDOM.nextInt(Variabelen.BreedteScherm - Variabelen.BreedteDroplet);
+		xSmileDroplet2 = xSmileDroplet1 + Variabelen.BreedteDroplet;
+
+		positie = new Vector(0, 0);
+	}
+
+	public boolean isDead() {
+		return positie.getY() > Variabelen.HoogteScherm + 1;
 	}
 }

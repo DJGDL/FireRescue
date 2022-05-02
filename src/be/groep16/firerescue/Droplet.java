@@ -10,6 +10,13 @@ import javax.imageio.ImageIO;
 public class Droplet implements Entity {
 	private static BufferedImage image = null;
 
+	private static final int Y_DROPLET_1 = -Variabelen.HoogteDroplet;
+	private static final int Y_DROPLET_2 = 0;
+	private static final int sourceXDroplet2 = 133;
+	private static final int sourceYDroplet2 = 132;
+
+	private int xDroplet1 = 0;
+	private int xDroplet2 = 0;
 	private Vector positie;
 
 	public Droplet() {
@@ -24,7 +31,7 @@ public class Droplet implements Entity {
 				e.printStackTrace();
 			}
 		}
-		
+
 	}
 
 	@Override
@@ -35,10 +42,21 @@ public class Droplet implements Entity {
 
 	@Override
 	public void onDraw(Graphics g) {
-		g.drawImage(image, Variabelen.XDroplet1 + (int) (positie.getX()), Variabelen.YDroplet1 + (int) (positie.getY()),
-				Variabelen.XDroplet2 + (int) (positie.getX()), Variabelen.YDroplet2 + (int) (positie.getY()), Variabelen.sourceX1,
-				Variabelen.sourceY1, Variabelen.sourceXDroplet2, Variabelen.sourceYDroplet2, null);
+		g.drawImage(image, xDroplet1 + (int) (positie.getX()), Y_DROPLET_1 + (int) (positie.getY()),
+				xDroplet2 + (int) (positie.getX()), Y_DROPLET_2 + (int) (positie.getY()), Variabelen.sourceX1,
+				Variabelen.sourceY1, sourceXDroplet2, sourceYDroplet2, null);
 
+	}
+
+	public void reset() {
+		xDroplet1 = Variabelen.RANDOM.nextInt(Variabelen.BreedteScherm - Variabelen.BreedteDroplet);
+		xDroplet2 = xDroplet1 + Variabelen.BreedteDroplet;
+
+		positie = new Vector(0, 0);
+	}
+
+	public boolean isDead() {
+		return positie.getY() > Variabelen.HoogteScherm + 1;
 	}
 
 

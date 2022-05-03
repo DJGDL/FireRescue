@@ -19,15 +19,17 @@ public class Rock implements Entity {
 	private int xRock2 = 0;
 	private Vector positie;
 
-	Rock() {
-		positie = new Vector(0, 0);
+	public Rock() {
+		reset();
 
-		File rock = new File("Steen.png");
+		if (image == null) {
+			File rock = new File("Steen.png");
 
-		try {
-			image = ImageIO.read(rock);
-		} catch (IOException e) {
-			e.printStackTrace();
+			try {
+				image = ImageIO.read(rock);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 

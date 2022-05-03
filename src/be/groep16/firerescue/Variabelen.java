@@ -49,5 +49,5 @@ public class Variabelen {
 	public static final int sourceY1 = 0;
 
 	public static final int UPDATE_SPEED = 10; // ms
-	public static final int SPAWN_SPEED = 20000; //ms
+	public static final int SPAWN_SPEED = 2000; //ms
 }

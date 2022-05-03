@@ -5,10 +5,6 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.util.ArrayList;
-import java.util.Stack;
 
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
@@ -18,37 +14,24 @@ import javax.swing.Timer;
 import javax.swing.border.Border;
 
 @SuppressWarnings("serial")
-public class Main extends JPanel implements ActionListener, KeyListener {
+public class Main extends JPanel implements ActionListener {
 	private Timer timer;
-	private long prevTime;
-	private Firefighter player;
-	private Entity entities;
+	private long prevTime = 0;
+	private GameManager gameManager;
+	
 	
 	int count = 0;
 	JLabel score;
 
 	public Main() {
-		addKeyListener(this);
+		gameManager = new GameManager();
+		addKeyListener(gameManager);
+		
 		setFocusable(true);
 		timer = new Timer(Variabelen.UPDATE_SPEED, this);
 		timer.start();
-		
-		Building building = new Building();
-		entities.add(building);
-		Fire fire = new Fire();
-		entities.add(fire);
-		Droplet droplet = new Droplet();
-		entities.add(droplet);
-		Rock rock = new Rock();
-		entities.add(rock);
-		SmileDroplet smileDroplet = new SmileDroplet();
-		entities.add(smileDroplet);
-		player = new Firefighter();
-		entities.add(player);
 
 	}
-		
-
 
 	public static void main(String[] args) {
 		JFrame frame = new JFrame();
@@ -81,41 +64,19 @@ public class Main extends JPanel implements ActionListener, KeyListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		long currTime = System.currentTimeMillis();
-		long deltaTime = currTime - prevTime;
+		long deltaTime = prevTime == 0 ? 0 : currTime - prevTime;
 		prevTime = currTime;
 		
-		for (Entity entity : entities) {
-			entity.onUpdate(deltaTime);
-		}
-
+		gameManager.onUpdate(deltaTime);
 		repaint();
 	}
 
 	@Override
-	public void paintComponent(Graphics g) {
+	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-
-		for (Entity entity : entities) {
-			entity.onDraw(g);
-		}
+		
+		gameManager.onDraw(g);
 	}
-
-	@Override
-	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void keyPressed(KeyEvent e) {
-		player.onKeyDown(e.getKeyCode());
-	}
-
-	@Override
-	public void keyReleased(KeyEvent e) {
-		player.onKeyUp(e.getKeyCode());
-	}
-	
 	
 
 }

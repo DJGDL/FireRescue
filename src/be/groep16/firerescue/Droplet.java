@@ -20,7 +20,7 @@ public class Droplet implements Entity {
 	private Vector positie;
 
 	public Droplet() {
-		positie = new Vector(0, 0);
+		reset();
 
 		if (image == null) {
 			File droplet = new File("Druppel.png");

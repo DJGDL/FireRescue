@@ -18,16 +18,19 @@ public class Fire implements Entity {
 	private int xFire2 = 0;
 	private Vector positie;
 
-	Fire() {
-		positie = new Vector(0, 0);
+	public Fire() {
+		reset();
+		
+		if (image == null) {
+			File fire = new File("Vuurbal.png");
 
-		File fire = new File("Vuurbal.png");
-
-		try {
-			image = ImageIO.read(fire);
-		} catch (IOException e) {
-			e.printStackTrace();
+			try {
+				image = ImageIO.read(fire);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
+		
 	}
 
 	@Override

@@ -1,6 +1,7 @@
 package be.groep16.firerescue;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
@@ -21,6 +22,9 @@ public class GameManager implements KeyListener {
 	private Firefighter player;
 	
 	private int COUNT_DOWN = 0;
+	
+	private int lives = 3;
+	private int score = 0;
 
 	private Entity getNewEntity(int id) {
 		
@@ -64,15 +68,14 @@ public class GameManager implements KeyListener {
 		if (COUNT_DOWN <= 0) {
 			COUNT_DOWN = Variabelen.SPAWN_SPEED;
 			
-			Random rand = new Random();
-			int chance = rand.nextInt(4);
-			if (chance < 1)
+			int chance = Variabelen.RANDOM.nextInt(11);
+			if (chance < 6)
 				getNewEntity(ROCK_ID);
-			if (chance >= 1 && chance < 2)
+			if (chance >= 6 && chance < 8)
 				getNewEntity(FIRE_ID);
-			if (chance >= 2 && chance < 3)
+			if (chance >= 8 && chance < 10)
 				getNewEntity(DROPLET_ID);
-			if (chance >= 3)
+			if (chance >= 10)
 				getNewEntity(SMILE_DROPLET_ID);
 		}
 
@@ -84,6 +87,31 @@ public class GameManager implements KeyListener {
 
 				if (e.isDead()) {
 					it.remove();
+					nonActiveEntity.get(id).push(e);
+				}
+			}
+		}
+		
+		// check collisions
+		for (int id = 0; id < activeEntity.size(); id++) {
+			for (Iterator<Entity> it = activeEntity.get(id).iterator(); it.hasNext();) {
+				Entity e = it.next();
+				
+				if (player.getBoundingBox().intersects(e.getBoundingBox())) {
+					if (e instanceof Rock) {
+						lives -= 2;
+					} else if (e instanceof Fire) {
+						lives --;
+						score -= 5;
+					} else if (e instanceof Droplet) {
+						score += 10;
+					} else if (e instanceof SmileDroplet) {
+						lives ++;
+						score += 20;
+					}
+					
+					it.remove();
+					nonActiveEntity.get(id).push(e);
 				}
 			}
 		}

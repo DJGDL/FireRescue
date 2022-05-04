@@ -1,6 +1,7 @@
 package be.groep16.firerescue;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -55,5 +56,14 @@ public class SmileDroplet implements Entity {
 
 	public boolean isDead() {
 		return positie.getY() > Variabelen.HoogteScherm + 1;
+	}
+
+	@Override
+	public Rectangle getBoundingBox() {
+		Rectangle r = new Rectangle(Variabelen.BreedteDroplet, Variabelen.HoogteDroplet);
+		r.x = (int) positie.getX();
+		r.y = (int) positie.getY();
+		
+		return r;
 	}
 }

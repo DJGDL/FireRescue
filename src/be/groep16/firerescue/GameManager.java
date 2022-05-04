@@ -70,11 +70,11 @@ public class GameManager implements KeyListener {
 			COUNT_DOWN = Variabelen.SPAWN_SPEED;
 			
 			int chance = Variabelen.RANDOM.nextInt(11);
-			if (chance < 6)
+			if (chance < 4)
 				getNewEntity(ROCK_ID);
-			if (chance >= 6 && chance < 8)
+			if (chance >= 4 && chance < 7)
 				getNewEntity(FIRE_ID);
-			if (chance >= 8 && chance < 10)
+			if (chance >= 7 && chance < 10)
 				getNewEntity(DROPLET_ID);
 			if (chance >= 10)
 				getNewEntity(SMILE_DROPLET_ID);

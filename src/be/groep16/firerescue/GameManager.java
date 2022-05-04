@@ -101,21 +101,18 @@ public class GameManager implements KeyListener {
 				if (player.getBoundingBox().intersects(e.getBoundingBox())) {
 					if (e instanceof Rock) {
 						lives -= 2;
-						it.remove();
 					} else if (e instanceof Fire) {
 						lives --;
 						score -= 5;
-						it.remove();
 					} else if (e instanceof Droplet) {
 						score += 10;
 						it.remove();
 					} else if (e instanceof SmileDroplet) {
 						lives ++;
 						score += 20;
-						it.remove();
 					}
 					
-					
+					it.remove();
 					nonActiveEntity.get(id).push(e);
 				}
 			}

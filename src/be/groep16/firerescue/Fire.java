@@ -62,8 +62,8 @@ public class Fire implements Entity {
 	@Override
 	public Rectangle getBoundingBox() {
 		Rectangle r = new Rectangle(Variabelen.BreedteFire, Variabelen.HoogteFire);
-		r.x = (int) positie.getX();
-		r.y = (int) positie.getY();
+		r.x = xFire1 +(int) positie.getX();
+		r.y = YFire1 + (int) positie.getY();
 		
 		return r;
 	}

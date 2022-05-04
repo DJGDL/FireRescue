@@ -11,8 +11,8 @@ import javax.imageio.ImageIO;
 public class SmileDroplet implements Entity {
 	private static BufferedImage image = null;
 
-	private static final int ySmileDroplet1 = -Variabelen.HoogteDroplet;
-	private static final int ySmileDroplet2 = 0;
+	private static final int YSmileDroplet1 = -Variabelen.HoogteDroplet;
+	private static final int YSmileDroplet2 = 0;
 	private static final int sourceXSmileDroplet2 = 890;
 	private static final int sourceYSmileDroplet2 = 890;
 
@@ -41,8 +41,8 @@ public class SmileDroplet implements Entity {
 
 	@Override
 	public void onDraw(Graphics g) {
-		g.drawImage(image, xSmileDroplet1 + (int) (positie.getX()), ySmileDroplet1 + (int) (positie.getY()),
-				xSmileDroplet2 + (int) (positie.getX()), ySmileDroplet2 + (int) (positie.getY()), Variabelen.sourceX1,
+		g.drawImage(image, xSmileDroplet1 + (int) (positie.getX()), YSmileDroplet1 + (int) (positie.getY()),
+				xSmileDroplet2 + (int) (positie.getX()), YSmileDroplet2 + (int) (positie.getY()), Variabelen.sourceX1,
 				Variabelen.sourceY1, sourceXSmileDroplet2, sourceYSmileDroplet2, null);
 
 	}
@@ -61,8 +61,8 @@ public class SmileDroplet implements Entity {
 	@Override
 	public Rectangle getBoundingBox() {
 		Rectangle r = new Rectangle(Variabelen.BreedteDroplet, Variabelen.HoogteDroplet);
-		r.x = (int) positie.getX();
-		r.y = (int) positie.getY();
+		r.x = xSmileDroplet1 + (int) positie.getX();
+		r.y = YSmileDroplet1 + (int) positie.getY();
 		
 		return r;
 	}

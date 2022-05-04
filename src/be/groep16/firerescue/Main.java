@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
 
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
@@ -18,7 +19,6 @@ public class Main extends JPanel implements ActionListener {
 	private Timer timer;
 	private long prevTime = 0;
 	private GameManager gameManager;
-	
 	
 	int count = 0;
 	JLabel score;
@@ -58,8 +58,8 @@ public class Main extends JPanel implements ActionListener {
 
 		frame.pack();
 	}
-	
-	
+
+
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -74,8 +74,8 @@ public class Main extends JPanel implements ActionListener {
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		
 		gameManager.onDraw(g);
+		
 	}
 	
 

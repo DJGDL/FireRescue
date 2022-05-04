@@ -31,7 +31,8 @@ public class GameManager implements KeyListener {
 				activeEntity.get(id).add(entity);
 
 				return entity;
-			} else {
+			} 
+			else {
 				Entity entity = switch (id) {
 				case ROCK_ID -> new Rock();
 				case FIRE_ID -> new Fire();

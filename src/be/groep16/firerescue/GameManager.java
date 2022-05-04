@@ -1,12 +1,12 @@
 package be.groep16.firerescue;
 
 import java.awt.Graphics;
-import java.awt.Rectangle;
+
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Random;
+
 import java.util.Stack;
 
 public class GameManager implements KeyListener {

@@ -19,9 +19,8 @@ public class Main extends JPanel implements ActionListener {
 	private long prevTime = 0;
 	private GameManager gameManager;
 	
-	int count = 0;
-	JLabel score;
-	JLabel lives;
+	JLabel Score;
+	JLabel Lives;
 
 	public Main() {
 		gameManager = new GameManager();
@@ -35,33 +34,33 @@ public class Main extends JPanel implements ActionListener {
 
 	public static void main(String[] args) {
 		JFrame frame = new JFrame();
-		JLabel score = new JLabel("score:");
-		JLabel lives = new JLabel("Lives:");
+		JLabel Score = new JLabel("score:");
+		JLabel Lives = new JLabel("Lives:");
 		JPanel mainPanel = new Main();
 		frame.add(mainPanel);
 		Border border = BorderFactory.createLineBorder(Color.black, 3);
 		
-		score.setBackground(Color.gray);
-		score.setOpaque(true);
-		score.setBorder(border);
-		score.setHorizontalAlignment(JLabel.LEFT);
-		score.setVerticalAlignment(JLabel.CENTER);
-		score.setBounds(5, 5, 75, 35);
+		Score.setBackground(Color.gray);
+		Score.setOpaque(true);
+		Score.setBorder(border);
+		Score.setHorizontalAlignment(JLabel.LEFT);
+		Score.setVerticalAlignment(JLabel.CENTER);
+		Score.setBounds(5, 5, 75, 35);
 		
-		lives.setBackground(Color.gray);
-		lives.setOpaque(true);
-		lives.setBorder(border);
-		lives.setHorizontalAlignment(JLabel.LEFT);
-		lives.setVerticalAlignment(JLabel.CENTER);
-		lives.setBounds(Variabelen.BreedteScherm - 80, 5, 75, 35);
+		Lives.setBackground(Color.gray);
+		Lives.setOpaque(true);
+		Lives.setBorder(border);
+		Lives.setHorizontalAlignment(JLabel.LEFT);
+		Lives.setVerticalAlignment(JLabel.CENTER);
+		Lives.setBounds(Variabelen.BreedteScherm - 80, 5, 75, 35);
 		
 		frame.setMinimumSize(new Dimension(Variabelen.BreedteScherm, Variabelen.HoogteScherm));
 		frame.setResizable(false);
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		mainPanel.setPreferredSize(new Dimension(Variabelen.BreedteScherm, Variabelen.HoogteScherm));
-		mainPanel.add(score);
-		mainPanel.add(lives);
+		mainPanel.add(Score);
+		mainPanel.add(Lives);
 		mainPanel.setLayout(null);
 
 		frame.pack();

@@ -1,7 +1,7 @@
 package be.groep16.firerescue;
 
 import java.awt.Graphics;
-
+import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
@@ -20,11 +20,13 @@ public class GameManager implements KeyListener {
 
 	private Building building;
 	private Firefighter player;
+	private Score scoreEntity;
 
 	private int COUNT_DOWN = 0;
 
 	private int lives = 3;
 	private int score = 0;
+	private int highScore = 0;
 
 	private Entity getNewEntity(int id) {
 
@@ -53,6 +55,7 @@ public class GameManager implements KeyListener {
 	public GameManager() {
 		building = new Building();
 		player = new Firefighter();
+		scoreEntity = new Score(0, 0, 0);
 
 		activeEntity = new ArrayList<>();
 		nonActiveEntity = new ArrayList<>();
@@ -106,9 +109,20 @@ public class GameManager implements KeyListener {
 						score -= 5;
 					} else if (e instanceof Droplet) {
 						score += 10;
+						if (highScore < score) {
+							highScore = score;
+						}
 					} else if (e instanceof SmileDroplet) {
 						lives++;
 						score += 20;
+						if (highScore < score) {
+							highScore = score;
+						}
+					}
+
+					if (Variabelen.DEBUG_MODE) {
+						System.out.println("Entity collided: " + e + ", with rect: " + e.getBoundingBox()
+								+ " and player at: " + player.getBoundingBox());
 					}
 
 					it.remove();
@@ -118,6 +132,11 @@ public class GameManager implements KeyListener {
 			}
 		}
 
+		// update score ui
+		scoreEntity.setHighScore(highScore);
+		scoreEntity.setScore(score);
+		scoreEntity.setLives(lives);
+		scoreEntity.onUpdate(deltaTime);
 	}
 
 	public void onDraw(Graphics g) {
@@ -125,9 +144,22 @@ public class GameManager implements KeyListener {
 		for (int id = 0; id < activeEntity.size(); id++) {
 			for (Entity e : activeEntity.get(id)) {
 				e.onDraw(g);
+
+				if (Variabelen.DEBUG_MODE) {
+					Rectangle bounds = e.getBoundingBox();
+					g.drawRect(bounds.x, bounds.y, bounds.width, bounds.height);
+				}
 			}
 		}
 		player.onDraw(g);
+
+		if (Variabelen.DEBUG_MODE) {
+			Rectangle bounds = player.getBoundingBox();
+			g.drawRect(bounds.x, bounds.y, bounds.width, bounds.height);
+		}
+
+		// draw last, to always be on top
+		scoreEntity.onDraw(g);
 	}
 
 	@Override

@@ -61,9 +61,9 @@ public class Rock implements Entity {
 
 	@Override
 	public Rectangle getBoundingBox() {
-		Rectangle r = new Rectangle(Variabelen.BreedteRock, Variabelen.HoogteRock);
-		r.x = xRock1 + (int) positie.getX();
-		r.y = YRock1 + (int) positie.getY();
+		Rectangle r = new Rectangle((int)((Variabelen.BreedteRock*2)/5), (int)((Variabelen.HoogteRock*2)/5));
+		r.x = xRock1 + (int)((Variabelen.BreedteRock*3)/10) + (int) positie.getX();
+		r.y = YRock1 + (int)((Variabelen.HoogteRock*3)/10) + (int) positie.getY();
 		
 		return r;
 	}

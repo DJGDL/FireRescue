@@ -5,6 +5,7 @@ import java.util.Random;
 public class Variabelen {
 
 	public static final Random RANDOM = new Random();
+	public static final boolean DEBUG_MODE = false;
 
 	/*
 	 * Breedte en Hoogte van alle foto's op beeld
@@ -19,6 +20,8 @@ public class Variabelen {
 	public static final int HoogteFire = 43;
 	public static final int BreedteBuilding = 440;
 	public static final int HoogteBuilding = 700;
+	public static final int BreedteHeart = 800;
+	public static final int HoogteHeart = 725;
 	/*
 	 * Breedte en hoogte scherm
 	 */

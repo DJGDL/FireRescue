@@ -34,11 +34,15 @@ public class Main extends JPanel implements ActionListener {
 
 	public static void main(String[] args) {
 		JFrame frame = new JFrame();
-		JLabel Score = new JLabel("score:");
-		JLabel Lives = new JLabel("Lives:");
 		JPanel mainPanel = new Main();
 		frame.add(mainPanel);
 		Border border = BorderFactory.createLineBorder(Color.black, 3);
+		/*
+		 * JLabel Score = new JLabel("score:");
+		JLabel Lives = new JLabel("Lives:");
+		
+		
+		
 		
 		Score.setBackground(Color.gray);
 		Score.setOpaque(true);
@@ -53,15 +57,21 @@ public class Main extends JPanel implements ActionListener {
 		Lives.setHorizontalAlignment(JLabel.LEFT);
 		Lives.setVerticalAlignment(JLabel.CENTER);
 		Lives.setBounds(Variabelen.BreedteScherm - 80, 5, 75, 35);
+		 */
+		
 		
 		frame.setMinimumSize(new Dimension(Variabelen.BreedteScherm, Variabelen.HoogteScherm));
 		frame.setResizable(false);
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		mainPanel.setPreferredSize(new Dimension(Variabelen.BreedteScherm, Variabelen.HoogteScherm));
+		/*
+		 * 
 		mainPanel.add(Score);
 		mainPanel.add(Lives);
 		mainPanel.setLayout(null);
+		 */
+		
 
 		frame.pack();
 	}

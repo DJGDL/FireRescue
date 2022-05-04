@@ -43,8 +43,8 @@ public class Firefighter implements Entity {
 		if (keyLeft && positie.getX() > 2 - Variabelen.BreedteScherm / 2)
 			positie = positie.add(-speed.getX()*deltaTime/10, 0);
 		
-		boundingBox.x = (int) positie.getX();
-		boundingBox.y = (int) positie.getY();
+		boundingBox.x = Variabelen.XFirefighter1 + (int) positie.getX();
+		boundingBox.y = Variabelen.YFirefighter1 + (int) positie.getY();
 	}
 
 	public void onKeyDown(int keycode) {

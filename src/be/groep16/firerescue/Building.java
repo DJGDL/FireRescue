@@ -1,6 +1,7 @@
 package be.groep16.firerescue;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -10,9 +11,12 @@ import javax.imageio.ImageIO;
 public class Building implements Entity {
 	private Vector positie;
 	private BufferedImage image;
+	
+	private Rectangle r;
 
 	Building() {
 		positie = new Vector(0, 0);
+		r = new Rectangle(0, 0);
 
 		File building = new File("gebouw.png");
 
@@ -35,5 +39,10 @@ public class Building implements Entity {
 				Variabelen.XBuilding2 + (int) (positie.getX()), Variabelen.YBuilding2 + (int) (positie.getY()), Variabelen.sourceX1,
 				Variabelen.sourceY1, Variabelen.sourceXBuilding2, Variabelen.sourceYBuilding2, null);
 
+	}
+
+	@Override
+	public Rectangle getBoundingBox() {
+		return r;
 	}
 }

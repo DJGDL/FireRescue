@@ -22,6 +22,7 @@ public class Main extends JPanel implements ActionListener {
 	
 	int count = 0;
 	JLabel score;
+	JLabel lives;
 
 	public Main() {
 		gameManager = new GameManager();
@@ -35,8 +36,8 @@ public class Main extends JPanel implements ActionListener {
 
 	public static void main(String[] args) {
 		JFrame frame = new JFrame();
-
 		JLabel score = new JLabel("score:");
+		JLabel lives = new JLabel("Lives:");
 		JPanel mainPanel = new Main();
 		frame.add(mainPanel);
 		Border border = BorderFactory.createLineBorder(Color.black, 3);
@@ -48,12 +49,20 @@ public class Main extends JPanel implements ActionListener {
 		score.setVerticalAlignment(JLabel.CENTER);
 		score.setBounds(5, 5, 75, 35);
 		
+		lives.setBackground(Color.gray);
+		lives.setOpaque(true);
+		lives.setBorder(border);
+		lives.setHorizontalAlignment(JLabel.LEFT);
+		lives.setVerticalAlignment(JLabel.CENTER);
+		lives.setBounds(Variabelen.BreedteScherm - 80, 5, 75, 35);
+		
 		frame.setMinimumSize(new Dimension(Variabelen.BreedteScherm, Variabelen.HoogteScherm));
 		frame.setResizable(false);
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		mainPanel.setPreferredSize(new Dimension(Variabelen.BreedteScherm, Variabelen.HoogteScherm));
 		mainPanel.add(score);
+		mainPanel.add(lives);
 		mainPanel.setLayout(null);
 
 		frame.pack();

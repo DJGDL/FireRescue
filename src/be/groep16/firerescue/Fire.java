@@ -18,6 +18,7 @@ public class Fire implements Entity {
 	private int xFire1 = 0;
 	private int xFire2 = 0;
 	private Vector positie;
+	
 
 	public Fire() {
 		reset();

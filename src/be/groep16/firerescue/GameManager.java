@@ -69,14 +69,14 @@ public class GameManager implements KeyListener {
 	public void onUpdate(long deltaTime) {
 		COUNT_DOWN -= (int) deltaTime;
 		if (COUNT_DOWN <= 0) {
-			COUNT_DOWN = Variabelen.SPAWN_SPEED;
+			COUNT_DOWN = Variabelen.SPAWN_SPEED - score;
 
 			int chance = Variabelen.RANDOM.nextInt(11);
-			if (chance < 4)
+			if (chance < 3)
 				getNewEntity(ROCK_ID);
-			if (chance >= 4 && chance < 7)
+			if (chance >= 3 && chance < 6)
 				getNewEntity(FIRE_ID);
-			if (chance >= 7 && chance < 10)
+			if (chance >= 6 && chance < 10)
 				getNewEntity(DROPLET_ID);
 			if (chance >= 10)
 				getNewEntity(SMILE_DROPLET_ID);
@@ -103,7 +103,8 @@ public class GameManager implements KeyListener {
 
 				if (player.getBoundingBox().intersects(e.getBoundingBox())) {
 					if (e instanceof Rock) {
-						lives -= 2;
+						lives --;
+						score -= 15;
 					} else if (e instanceof Fire) {
 						lives--;
 						score -= 5;
@@ -113,7 +114,9 @@ public class GameManager implements KeyListener {
 							highScore = score;
 						}
 					} else if (e instanceof SmileDroplet) {
-						lives++;
+						if (lives < 3) {
+							lives++;
+						}
 						score += 20;
 						if (highScore < score) {
 							highScore = score;
@@ -124,7 +127,7 @@ public class GameManager implements KeyListener {
 						System.out.println("Entity collided: " + e + ", with rect: " + e.getBoundingBox()
 								+ " and player at: " + player.getBoundingBox());
 					}
-
+					
 					it.remove();
 					nonActiveEntity.get(id).push(e);
 

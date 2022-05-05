@@ -20,6 +20,7 @@ public class Score implements Entity {
 	private static final int srcY2 = 725;
 	private int sourceGameOverX2 = 304;
 	private int sourceGameOverY2 = 200;
+	Color myColor = new Color(255, 255, 255, 127);
 
 	public Score(int score, int highScore, int lives) {
 		super();
@@ -36,15 +37,15 @@ public class Score implements Entity {
 				e.printStackTrace();
 			}
 		}
-		//if (gameOver == null) {
-			//File gameOver = new File("Game over.png");
+		if (gameOver == null) {
+			File gameOverFile = new File("GameOver.png");
 
-			//try {
-				//image = ImageIO.read(gameOver);
-			//} catch (IOException e) {
-				//e.printStackTrace();
-			//}
-		//}
+			try {
+				gameOver = ImageIO.read(gameOverFile);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	
@@ -69,7 +70,6 @@ public class Score implements Entity {
 
 	@Override
 	public void onDraw(Graphics g) {
-		// TODO Auto-generated method stub
 
 		g.setColor(Color.white);
 		g.fillRect(5, 5, 120, 35);
@@ -83,11 +83,17 @@ public class Score implements Entity {
 		for (int i = 0; i < lives; i++) {
 			g.drawImage(image, Variabelen.BreedteScherm - 80 + (i * 17), 5, Variabelen.BreedteScherm - 64 + (i * 17), 20,
 					0, 0, srcX2, srcY2, null);
-		//if (lives <=0) {
-			//g.drawImage(gameOver, (int)(Variabelen.BreedteScherm / 3), (int)(Variabelen.HoogteScherm / 3), (int)((Variabelen.BreedteScherm * 2) / 3) , (int)((Variabelen.HoogteScherm * 2) / 3),
-					//0, 0, sourceGameOverX2, sourceGameOverY2, null);
-		//}
 		}
+		if (lives <=0) {
+			g.setColor(myColor);
+			g.fillRect(0, 0, Variabelen.BreedteScherm, Variabelen.HoogteScherm);
+			g.drawImage(gameOver, (int)(Variabelen.BreedteScherm / 3), (int)(Variabelen.HoogteScherm / 3), (int)((Variabelen.BreedteScherm * 2) / 3) , (int)((Variabelen.HoogteScherm * 2) / 3),
+					0, 0, sourceGameOverX2, sourceGameOverY2, null);
+			g.setColor(Color.black);
+			g.drawString("Highscore", (Variabelen.BreedteScherm / 2) - 50, (Variabelen.HoogteScherm * 2) / 3);
+			
+		}
+		
 
 	}
 

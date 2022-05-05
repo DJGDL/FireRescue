@@ -15,10 +15,11 @@ public class Score implements Entity {
 	private int highScore;
 	private int lives;
 	private BufferedImage image;
-	private static final int srcX1 = 0;
+	private BufferedImage gameOver;
 	private static final int srcX2 = 800;
-	private static final int srcY1 = 0;
 	private static final int srcY2 = 725;
+	private int sourceGameOverX2 = 304;
+	private int sourceGameOverY2 = 200;
 
 	public Score(int score, int highScore, int lives) {
 		super();
@@ -35,6 +36,15 @@ public class Score implements Entity {
 				e.printStackTrace();
 			}
 		}
+		//if (gameOver == null) {
+			//File gameOver = new File("Game over.png");
+
+			//try {
+				//image = ImageIO.read(gameOver);
+			//} catch (IOException e) {
+				//e.printStackTrace();
+			//}
+		//}
 	}
 
 	
@@ -72,7 +82,11 @@ public class Score implements Entity {
 		g.drawString(Integer.toString(highScore), 80, 30);
 		for (int i = 0; i < lives; i++) {
 			g.drawImage(image, Variabelen.BreedteScherm - 80 + (i * 17), 5, Variabelen.BreedteScherm - 64 + (i * 17), 20,
-					srcX1, srcY1, srcX2, srcY2, null);
+					0, 0, srcX2, srcY2, null);
+		//if (lives <=0) {
+			//g.drawImage(gameOver, (int)(Variabelen.BreedteScherm / 3), (int)(Variabelen.HoogteScherm / 3), (int)((Variabelen.BreedteScherm * 2) / 3) , (int)((Variabelen.HoogteScherm * 2) / 3),
+					//0, 0, sourceGameOverX2, sourceGameOverY2, null);
+		//}
 		}
 
 	}

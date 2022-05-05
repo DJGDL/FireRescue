@@ -5,7 +5,7 @@ import java.util.Random;
 public class Variabelen {
 
 	public static final Random RANDOM = new Random();
-	public static final boolean DEBUG_MODE = false;
+	public static final boolean DEBUG_MODE = true;
 
 	/*
 	 * Breedte en Hoogte van alle foto's op beeld

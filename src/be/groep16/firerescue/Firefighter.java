@@ -23,7 +23,7 @@ public class Firefighter implements Entity {
 	Firefighter() {
 		positie = new Vector(0, 0);
 		speed = new Vector(2, 0);
-		boundingBox = new Rectangle(Variabelen.BreedteFirefighter,
+		boundingBox = new Rectangle(Variabelen.BreedteFirefighter - 20,
 				Variabelen.HoogteFirefighter);
 		
 		File firefighter = new File("brandweerman.png");
@@ -43,7 +43,7 @@ public class Firefighter implements Entity {
 		if (keyLeft && positie.getX() > 2 - Variabelen.BreedteScherm / 2)
 			positie = positie.add(-speed.getX()*deltaTime/10, 0);
 		
-		boundingBox.x = Variabelen.XFirefighter1 + (int) positie.getX();
+		boundingBox.x = Variabelen.XFirefighter1 + 20 + (int) positie.getX();
 		boundingBox.y = Variabelen.YFirefighter1 + (int) positie.getY();
 	}
 

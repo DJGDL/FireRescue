@@ -104,10 +104,16 @@ public class GameManager implements KeyListener {
 				if (player.getBoundingBox().intersects(e.getBoundingBox())) {
 					if (e instanceof Rock) {
 						lives --;
-						score -= 15;
+						if (score > 0) {
+							score -= 15;
+						}
+						
 					} else if (e instanceof Fire) {
 						lives--;
-						score -= 5;
+						if (score > 0) {
+							score -= 5;
+						}
+						
 					} else if (e instanceof Droplet) {
 						score += 10;
 						if (highScore < score) {

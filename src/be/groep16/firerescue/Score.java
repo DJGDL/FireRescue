@@ -93,8 +93,8 @@ public class Score implements Entity {
 					0, 0, sourceGameOverX2, sourceGameOverY2, null);
 			g.setColor(Color.black);
 			g.setFont(myFont2);
-			g.drawString("Highscore:", (Variabelen.BreedteScherm / 2) - 70, ((Variabelen.HoogteScherm * 2) / 3) + 20);
-			g.drawString(Integer.toString(highScore), (Variabelen.BreedteScherm / 2) + 25, ((Variabelen.HoogteScherm * 2) / 3) + 20);
+			g.drawString("Highscore:"+" "+Integer.toString(highScore), (Variabelen.BreedteScherm / 2) - 70, ((Variabelen.HoogteScherm * 2) / 3) + 20);
+			
 		}
 		
 

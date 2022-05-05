@@ -22,7 +22,8 @@ public class Score implements Entity {
 	private int sourceGameOverX2 = 304;
 	private int sourceGameOverY2 = 200;
 	Color myColor = new Color(255, 255, 255, 127);
-	Font myFont = new Font("Arial", Font.BOLD, 17);
+	Font myFont1 = new Font("Arial", Font.BOLD, 12);
+	Font myFont2 = new Font("Arial", Font.BOLD, 17);
 
 	public Score(int score, int highScore, int lives) {
 		super();
@@ -77,12 +78,10 @@ public class Score implements Entity {
 		g.fillRect(5, 5, 120, 35);
 		g.fillRect(Variabelen.BreedteScherm - 125, 5, 120, 20);
 		g.setColor(Color.black);
-		g.setFont(myFont);
-		g.drawString("score:", 10, 17);
-		g.drawString("Highs score:", 10, 30);
+		g.setFont(myFont1);
+		g.drawString("score:"+" "+ Integer.toString(score), 10, 17);
+		g.drawString("Highs score:"+" "+Integer.toString(highScore), 10, 30);
 		g.drawString("Lives:", Variabelen.BreedteScherm - 120, 18);
-		g.drawString(Integer.toString(score), 80, 17);
-		g.drawString(Integer.toString(highScore), 80, 30);
 		for (int i = 0; i < lives; i++) {
 			g.drawImage(image, Variabelen.BreedteScherm - 80 + (i * 17), 5, Variabelen.BreedteScherm - 64 + (i * 17), 20,
 					0, 0, srcX2, srcY2, null);
@@ -93,7 +92,7 @@ public class Score implements Entity {
 			g.drawImage(gameOver, (int)(Variabelen.BreedteScherm / 3), (int)(Variabelen.HoogteScherm / 3), (int)((Variabelen.BreedteScherm * 2) / 3) , (int)((Variabelen.HoogteScherm * 2) / 3),
 					0, 0, sourceGameOverX2, sourceGameOverY2, null);
 			g.setColor(Color.black);
-			g.setFont(myFont);
+			g.setFont(myFont2);
 			g.drawString("Highscore:", (Variabelen.BreedteScherm / 2) - 70, ((Variabelen.HoogteScherm * 2) / 3) + 20);
 			g.drawString(Integer.toString(highScore), (Variabelen.BreedteScherm / 2) + 25, ((Variabelen.HoogteScherm * 2) / 3) + 20);
 		}

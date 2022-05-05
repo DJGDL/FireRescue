@@ -77,6 +77,7 @@ public class Score implements Entity {
 		g.fillRect(5, 5, 120, 35);
 		g.fillRect(Variabelen.BreedteScherm - 125, 5, 120, 20);
 		g.setColor(Color.black);
+		g.setFont(myFont);
 		g.drawString("score:", 10, 17);
 		g.drawString("Highs score:", 10, 30);
 		g.drawString("Lives:", Variabelen.BreedteScherm - 120, 18);

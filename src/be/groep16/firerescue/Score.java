@@ -1,6 +1,7 @@
 package be.groep16.firerescue;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -21,6 +22,7 @@ public class Score implements Entity {
 	private int sourceGameOverX2 = 304;
 	private int sourceGameOverY2 = 200;
 	Color myColor = new Color(255, 255, 255, 127);
+	Font myFont = new Font("Arial", Font.BOLD, 17);
 
 	public Score(int score, int highScore, int lives) {
 		super();
@@ -90,8 +92,9 @@ public class Score implements Entity {
 			g.drawImage(gameOver, (int)(Variabelen.BreedteScherm / 3), (int)(Variabelen.HoogteScherm / 3), (int)((Variabelen.BreedteScherm * 2) / 3) , (int)((Variabelen.HoogteScherm * 2) / 3),
 					0, 0, sourceGameOverX2, sourceGameOverY2, null);
 			g.setColor(Color.black);
-			g.drawString("Highscore", (Variabelen.BreedteScherm / 2) - 50, (Variabelen.HoogteScherm * 2) / 3);
-			
+			g.setFont(myFont);
+			g.drawString("Highscore:", (Variabelen.BreedteScherm / 2) - 70, ((Variabelen.HoogteScherm * 2) / 3) + 20);
+			g.drawString(Integer.toString(highScore), (Variabelen.BreedteScherm / 2) + 25, ((Variabelen.HoogteScherm * 2) / 3) + 20);
 		}
 		
 

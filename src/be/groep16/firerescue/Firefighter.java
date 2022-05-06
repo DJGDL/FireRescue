@@ -11,7 +11,7 @@ import javax.imageio.ImageIO;
 
 public class Firefighter implements Entity {
 	private Vector positie;
-	private Vector speed;
+	private float speed;
 	private BufferedImage image;
 	private Rectangle boundingBox;
 
@@ -22,7 +22,8 @@ public class Firefighter implements Entity {
 
 	Firefighter() {
 		positie = new Vector(0, 0);
-		speed = new Vector(2, 0);
+		
+		setDifficulity(0); // sets speed with 0 difficulity
 		boundingBox = new Rectangle(Variabelen.BreedteFirefighter - 20,
 				Variabelen.HoogteFirefighter);
 		
@@ -38,10 +39,10 @@ public class Firefighter implements Entity {
 	@Override
 	public void onUpdate(long deltaTime) {
 		if (keyRight && positie.getX() < ((Variabelen.BreedteScherm / 2) - (Variabelen.BreedteFirefighter / 2)))
-			positie = positie.add(speed.getX()*deltaTime/10, 0);
+			positie = positie.add(speed*deltaTime/10, 0);
 
 		if (keyLeft && positie.getX() > 2 - Variabelen.BreedteScherm / 2)
-			positie = positie.add(-speed.getX()*deltaTime/10, 0);
+			positie = positie.add(-speed*deltaTime/10, 0);
 		
 		boundingBox.x = Variabelen.XFirefighter1 + 20 + (int) positie.getX();
 		boundingBox.y = Variabelen.YFirefighter1 + (int) positie.getY();
@@ -80,5 +81,9 @@ public class Firefighter implements Entity {
 	@Override
 	public Rectangle getBoundingBox() {
 		return boundingBox;
+	}
+	
+	public void setDifficulity(float difficulity) {
+		speed = (float) Math.min(1 + 0.005 * difficulity, 5);
 	}
 }

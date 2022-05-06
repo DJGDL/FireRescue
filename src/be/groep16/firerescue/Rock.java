@@ -55,7 +55,7 @@ public class Rock implements Entity {
 		xRock2 = xRock1 + Variabelen.BreedteRock;
 
 		positie = new Vector(0, 0);
-		if (velocity < 2) {
+		if (velocity < 5) {
 			velocity = 1.3f + 0.001f * difficulty;
 		}
 	}

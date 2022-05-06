@@ -56,7 +56,7 @@ public class Droplet implements Entity {
 		xDroplet2 = xDroplet1 + Variabelen.BreedteDroplet;
 
 		positie = new Vector(0, 0);
-		if (velocity < 5) {
+		if (velocity < 8) {
 			velocity = 1f + 0.005f * difficulty;
 		}
 	}

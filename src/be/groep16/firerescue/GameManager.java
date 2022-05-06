@@ -13,7 +13,7 @@ public class GameManager implements KeyListener {
 	private static final int ROCK_ID = 0;
 	private static final int FIRE_ID = 1;
 	private static final int DROPLET_ID = 2;
-	private static final int SMILE_DROPLET_ID = 3;
+	private static final int GOLDEN_DROPLET_ID = 3;
 
 	private ArrayList<ArrayList<Entity>> activeEntity;
 	private ArrayList<Stack<Entity>> nonActiveEntity;
@@ -25,7 +25,7 @@ public class GameManager implements KeyListener {
 	private int COUNT_DOWN = 0;
 
 	private int lives = 3;
-	private int score = 0;
+	private int score = 300;
 	private int highScore = 0;
 
 	private Entity getNewEntity(int id) {
@@ -42,7 +42,7 @@ public class GameManager implements KeyListener {
 			case ROCK_ID -> new Rock();
 			case FIRE_ID -> new Fire();
 			case DROPLET_ID -> new Droplet();
-			case SMILE_DROPLET_ID -> new GoldenDroplet();
+			case GOLDEN_DROPLET_ID -> new GoldenDroplet();
 			default -> throw new IllegalArgumentException("Unexpected value: " + id);
 			};
 			activeEntity.get(id).add(entity);
@@ -71,9 +71,9 @@ public class GameManager implements KeyListener {
 
 		if (lives > 0) {
 			if (COUNT_DOWN <= 0) {
-				COUNT_DOWN = Variabelen.SPAWN_SPEED - (int) (10 * score);
-				if (COUNT_DOWN < 1000) {
-					COUNT_DOWN = 1000;
+				COUNT_DOWN = Variabelen.SPAWN_SPEED - (int) (5 * score);
+				if (COUNT_DOWN < 500) {
+					COUNT_DOWN = 500;
 				}
 				int chance = Variabelen.RANDOM.nextInt(85);
 				if (chance < 40)
@@ -82,12 +82,13 @@ public class GameManager implements KeyListener {
 					getNewEntity(FIRE_ID);
 				if (chance >= 50 && chance < 80)
 					getNewEntity(DROPLET_ID);
-				if (chance >= 85)
-					getNewEntity(SMILE_DROPLET_ID);
+				if (chance >= 80)
+					getNewEntity(GOLDEN_DROPLET_ID);
 				
 
 			}
 
+			player.setDifficulity(score);
 			player.onUpdate(deltaTime);
 			for (int id = 0; id < activeEntity.size(); id++) {
 				for (Iterator<Entity> it = activeEntity.get(id).iterator(); it.hasNext();) {

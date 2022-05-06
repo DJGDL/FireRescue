@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 import javax.swing.border.Border;
+import java.io.File;
 
 @SuppressWarnings("serial")
 public class Main extends JPanel implements ActionListener {

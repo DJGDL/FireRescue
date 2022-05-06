@@ -94,7 +94,7 @@ public class Score implements Entity {
 			g.setColor(Color.black);
 			g.setFont(myFont2);
 			g.drawString("Highscore:"+" "+Integer.toString(highScore), (Variabelen.BreedteScherm / 2) - 70, ((Variabelen.HoogteScherm * 2) / 3) + 20);
-			
+
 		}
 		
 

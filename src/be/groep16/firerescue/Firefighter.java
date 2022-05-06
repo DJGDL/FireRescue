@@ -1,6 +1,7 @@
 package be.groep16.firerescue;
 
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
@@ -13,6 +14,7 @@ public class Firefighter implements Entity {
 	private Vector positie;
 	private Vector speed;
 	private BufferedImage image;
+	private BufferedImage f_image;
 	private Rectangle boundingBox;
 
 	private boolean keyLeft = false;
@@ -27,9 +29,12 @@ public class Firefighter implements Entity {
 				Variabelen.HoogteFirefighter);
 		
 		File firefighter = new File("brandweerman.png");
+		File flipped_ff = new File("Flipped_brandweerman.png");
+		
 
 		try {
 			image = ImageIO.read(firefighter);
+			f_image = ImageIO.read(flipped_ff);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -67,10 +72,14 @@ public class Firefighter implements Entity {
 
 	@Override
 	public void onDraw(Graphics g) {
-		g.drawImage(image, Variabelen.XFirefighter1 + (int) (positie.getX()), Variabelen.YFirefighter1 + (int) (positie.getY()),
-				Variabelen.XFirefighter2 + (int) (positie.getX()), Variabelen.YFirefighter2 + (int) (positie.getY()), Variabelen.sourceX1,
-				Variabelen.sourceY1, Variabelen.sourceXFirefighter2, Variabelen.sourceYFirefighter2, null);
+			g.drawImage(image, Variabelen.XFirefighter1 + (int) (positie.getX()), Variabelen.YFirefighter1 + (int) (positie.getY()),
+					Variabelen.XFirefighter2 + (int) (positie.getX()), Variabelen.YFirefighter2 + (int) (positie.getY()), Variabelen.sourceX1,
+					Variabelen.sourceY1, Variabelen.sourceXFirefighter2, Variabelen.sourceYFirefighter2, null);
+			
+		
 	}
+	
+
 	
 	/**
 	 * We dont have a live :)

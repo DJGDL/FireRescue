@@ -68,75 +68,78 @@ public class GameManager implements KeyListener {
 
 	public void onUpdate(long deltaTime) {
 		COUNT_DOWN -= (int) deltaTime;
-		if (COUNT_DOWN <= 0) {
-			COUNT_DOWN = Variabelen.SPAWN_SPEED - score;
 
-			int chance = Variabelen.RANDOM.nextInt(11);
-			if (chance < 3)
-				getNewEntity(ROCK_ID);
-			if (chance >= 3 && chance < 6)
-				getNewEntity(FIRE_ID);
-			if (chance >= 6 && chance < 10)
-				getNewEntity(DROPLET_ID);
-			if (chance >= 10)
-				getNewEntity(SMILE_DROPLET_ID);
+		if (lives > 0) {
+			if (COUNT_DOWN <= 0) {
+				COUNT_DOWN = Variabelen.SPAWN_SPEED - score;
 
-		}
+				int chance = Variabelen.RANDOM.nextInt(11);
+				if (chance < 3)
+					getNewEntity(ROCK_ID);
+				if (chance >= 3 && chance < 6)
+					getNewEntity(FIRE_ID);
+				if (chance >= 6 && chance < 10)
+					getNewEntity(DROPLET_ID);
+				if (chance >= 10)
+					getNewEntity(SMILE_DROPLET_ID);
 
-		player.onUpdate(deltaTime);
-		for (int id = 0; id < activeEntity.size(); id++) {
-			for (Iterator<Entity> it = activeEntity.get(id).iterator(); it.hasNext();) {
-				Entity e = it.next();
-				e.onUpdate(deltaTime);
+			}
 
-				if (e.isDead()) {
-					it.remove();
-					nonActiveEntity.get(id).push(e);
+			player.onUpdate(deltaTime);
+			for (int id = 0; id < activeEntity.size(); id++) {
+				for (Iterator<Entity> it = activeEntity.get(id).iterator(); it.hasNext();) {
+					Entity e = it.next();
+					e.onUpdate(deltaTime);
+
+					if (e.isDead()) {
+						it.remove();
+						nonActiveEntity.get(id).push(e);
+					}
 				}
 			}
-		}
 
-		// check collisions
-		for (int id = 0; id < activeEntity.size(); id++) {
-			for (Iterator<Entity> it = activeEntity.get(id).iterator(); it.hasNext();) {
-				Entity e = it.next();
+			// check collisions
+			for (int id = 0; id < activeEntity.size(); id++) {
+				for (Iterator<Entity> it = activeEntity.get(id).iterator(); it.hasNext();) {
+					Entity e = it.next();
 
-				if (player.getBoundingBox().intersects(e.getBoundingBox())) {
-					if (e instanceof Rock) {
-						lives --;
-						if (score > 0) {
-							score -= 15;
+					if (player.getBoundingBox().intersects(e.getBoundingBox())) {
+						if (e instanceof Rock) {
+							lives--;
+							if (score > 0) {
+								score -= 15;
+							}
+
+						} else if (e instanceof Fire) {
+							lives--;
+							if (score > 0) {
+								score -= 5;
+							}
+
+						} else if (e instanceof Droplet) {
+							score += 10;
+							if (highScore < score) {
+								highScore = score;
+							}
+						} else if (e instanceof SmileDroplet) {
+							if (lives < 3) {
+								lives++;
+							}
+							score += 20;
+							if (highScore < score) {
+								highScore = score;
+							}
 						}
-						
-					} else if (e instanceof Fire) {
-						lives--;
-						if (score > 0) {
-							score -= 5;
+
+						if (Variabelen.DEBUG_MODE) {
+							System.out.println("Entity collided: " + e + ", with rect: " + e.getBoundingBox()
+									+ " and player at: " + player.getBoundingBox());
 						}
-						
-					} else if (e instanceof Droplet) {
-						score += 10;
-						if (highScore < score) {
-							highScore = score;
-						}
-					} else if (e instanceof SmileDroplet) {
-						if (lives < 3) {
-							lives++;
-						}
-						score += 20;
-						if (highScore < score) {
-							highScore = score;
-						}
+
+						it.remove();
+						nonActiveEntity.get(id).push(e);
+
 					}
-
-					if (Variabelen.DEBUG_MODE) {
-						System.out.println("Entity collided: " + e + ", with rect: " + e.getBoundingBox()
-								+ " and player at: " + player.getBoundingBox());
-					}
-					
-					it.remove();
-					nonActiveEntity.get(id).push(e);
-
 				}
 			}
 		}

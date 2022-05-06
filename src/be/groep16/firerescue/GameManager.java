@@ -25,7 +25,7 @@ public class GameManager implements KeyListener {
 	private int COUNT_DOWN = 0;
 
 	private int lives = 3;
-	private int score = 300;
+	private int score = 0;
 	private int highScore = 0;
 
 	private Entity getNewEntity(int id) {

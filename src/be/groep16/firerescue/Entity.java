@@ -9,6 +9,6 @@ public interface Entity {
 	
 	Rectangle getBoundingBox();
 	
-	default void reset() {}
+	default void reset(float difficulty) {}
 	default boolean isDead() { return false; }
 }

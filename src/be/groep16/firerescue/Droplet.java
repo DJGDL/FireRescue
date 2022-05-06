@@ -19,9 +19,10 @@ public class Droplet implements Entity {
 	private int xDroplet1 = 0;
 	private int xDroplet2 = 0;
 	private Vector positie;
+	private float velocity;
 
 	public Droplet() {
-		reset();
+		reset(0);
 
 		if (image == null) {
 			File droplet = new File("Druppel.png");
@@ -37,7 +38,7 @@ public class Droplet implements Entity {
 
 	@Override
 	public void onUpdate(long deltaTime) {
-		positie = positie.add(0, 1);
+		positie = positie.add(0, velocity);
 
 	}
 
@@ -49,11 +50,15 @@ public class Droplet implements Entity {
 
 	}
 
-	public void reset() {
+	@Override
+	public void reset(float difficulty) {
 		xDroplet1 = Variabelen.RANDOM.nextInt(Variabelen.BreedteScherm - Variabelen.BreedteDroplet);
 		xDroplet2 = xDroplet1 + Variabelen.BreedteDroplet;
 
 		positie = new Vector(0, 0);
+		if (velocity < 5) {
+			velocity = 1f + 0.005f * difficulty;
+		}
 	}
 
 	public boolean isDead() {

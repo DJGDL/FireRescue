@@ -32,7 +32,7 @@ public class GameManager implements KeyListener {
 
 		if (nonActiveEntity.get(id).size() > 0) {
 			Entity entity = nonActiveEntity.get(id).pop();
-			entity.reset();
+			entity.reset(score);
 
 			activeEntity.get(id).add(entity);
 
@@ -42,7 +42,7 @@ public class GameManager implements KeyListener {
 			case ROCK_ID -> new Rock();
 			case FIRE_ID -> new Fire();
 			case DROPLET_ID -> new Droplet();
-			case SMILE_DROPLET_ID -> new SmileDroplet();
+			case SMILE_DROPLET_ID -> new GoldenDroplet();
 			default -> throw new IllegalArgumentException("Unexpected value: " + id);
 			};
 			activeEntity.get(id).add(entity);
@@ -71,17 +71,20 @@ public class GameManager implements KeyListener {
 
 		if (lives > 0) {
 			if (COUNT_DOWN <= 0) {
-				COUNT_DOWN = Variabelen.SPAWN_SPEED - score;
-
-				int chance = Variabelen.RANDOM.nextInt(11);
-				if (chance < 3)
+				COUNT_DOWN = Variabelen.SPAWN_SPEED - (int) (10 * score);
+				if (COUNT_DOWN < 1000) {
+					COUNT_DOWN = 1000;
+				}
+				int chance = Variabelen.RANDOM.nextInt(85);
+				if (chance < 40)
 					getNewEntity(ROCK_ID);
-				if (chance >= 3 && chance < 6)
+				if (chance >= 40 && chance < 50)
 					getNewEntity(FIRE_ID);
-				if (chance >= 6 && chance < 10)
+				if (chance >= 50 && chance < 80)
 					getNewEntity(DROPLET_ID);
-				if (chance >= 10)
+				if (chance >= 85)
 					getNewEntity(SMILE_DROPLET_ID);
+				
 
 			}
 
@@ -121,7 +124,7 @@ public class GameManager implements KeyListener {
 							if (highScore < score) {
 								highScore = score;
 							}
-						} else if (e instanceof SmileDroplet) {
+						} else if (e instanceof GoldenDroplet) {
 							if (lives < 3) {
 								lives++;
 							}

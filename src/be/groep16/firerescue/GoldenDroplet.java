@@ -8,26 +8,27 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class SmileDroplet implements Entity {
+public class GoldenDroplet implements Entity {
 	private static BufferedImage image = null;
 
 	private static final int YSmileDroplet1 = -Variabelen.HoogteDroplet;
 	private static final int YSmileDroplet2 = 0;
-	private static final int sourceXSmileDroplet2 = 890;
-	private static final int sourceYSmileDroplet2 = 890;
+	private static final int sourceXSmileDroplet2 = 260;
+	private static final int sourceYSmileDroplet2 = 280;
 
 	private int xSmileDroplet1 = 0;
 	private int xSmileDroplet2 = 0;
 	private Vector positie;
+	private float velocity;
 
-	SmileDroplet() {
-		reset();
+	GoldenDroplet() {
+		reset(0);
 
 		if (image == null) {
-			File smileDroplet = new File("Smile_Druppel.png");
+			File goldenDroplet = new File("GoldenDroplet.png");
 
 			try {
-				image = ImageIO.read(smileDroplet);
+				image = ImageIO.read(goldenDroplet);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -36,7 +37,7 @@ public class SmileDroplet implements Entity {
 
 	@Override
 	public void onUpdate(long deltaTime) {
-		positie = positie.add(0, 1);
+		positie = positie.add(0, velocity);
 	}
 
 	@Override
@@ -47,13 +48,18 @@ public class SmileDroplet implements Entity {
 
 	}
 
-	public void reset() {
+	@Override
+	public void reset(float difficulty) {
 		xSmileDroplet1 = Variabelen.RANDOM.nextInt(Variabelen.BreedteScherm - Variabelen.BreedteDroplet);
 		xSmileDroplet2 = xSmileDroplet1 + Variabelen.BreedteDroplet;
 
 		positie = new Vector(0, 0);
+		if (velocity < 5) {
+			velocity = 1f + 0.005f * difficulty;
+		}
 	}
 
+	@Override
 	public boolean isDead() {
 		return positie.getY() > Variabelen.HoogteScherm + 1;
 	}

@@ -18,10 +18,11 @@ public class Fire implements Entity {
 	private int xFire1 = 0;
 	private int xFire2 = 0;
 	private Vector positie;
+	private float velocity;
 	
 
 	public Fire() {
-		reset();
+		reset(0);
 		
 		if (image == null) {
 			File fire = new File("Vuurbal.png");
@@ -37,7 +38,7 @@ public class Fire implements Entity {
 
 	@Override
 	public void onUpdate(long deltaTime) {
-		positie = positie.add(0, 1);
+		positie = positie.add(0, velocity);
 
 	}
 
@@ -49,13 +50,18 @@ public class Fire implements Entity {
 
 	}
 
-	public void reset() {
+	@Override
+	public void reset(float difficulty) {
 		xFire1 = Variabelen.RANDOM.nextInt(Variabelen.BreedteScherm - Variabelen.BreedteFire);
 		xFire2 = xFire1 + Variabelen.BreedteFire;
 
 		positie = new Vector(0, 0);
+		if (velocity < 10) {
+			velocity = 1f + 0.01f * difficulty;
+		}
 	}
 
+	@Override
 	public boolean isDead() {
 		return positie.getY() > Variabelen.HoogteScherm + 1;
 	}

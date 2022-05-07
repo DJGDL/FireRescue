@@ -45,6 +45,7 @@ public class GameManager implements KeyListener {
 			case GOLDEN_DROPLET_ID -> new GoldenDroplet();
 			default -> throw new IllegalArgumentException("Unexpected value: " + id);
 			};
+			entity.reset(score);
 			activeEntity.get(id).add(entity);
 
 			return entity;

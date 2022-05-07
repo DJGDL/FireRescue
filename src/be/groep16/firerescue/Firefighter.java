@@ -1,7 +1,6 @@
 package be.groep16.firerescue;
 
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
@@ -14,7 +13,6 @@ public class Firefighter implements Entity {
 	private Vector positie;
 	private float speed;
 	private BufferedImage image;
-	private BufferedImage f_image;
 	private Rectangle boundingBox;
 
 	private boolean keyLeft = false;
@@ -30,12 +28,10 @@ public class Firefighter implements Entity {
 				Variabelen.HoogteFirefighter);
 		
 		File firefighter = new File("brandweerman.png");
-		File flipped_ff = new File("Flipped_brandweerman.png");
 		
 
 		try {
 			image = ImageIO.read(firefighter);
-			f_image = ImageIO.read(flipped_ff);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -18,6 +18,8 @@ public class Firefighter implements Entity {
 	private boolean keyLeft = false;
 	private boolean keyRight = false;
 	
+	public boolean direction = true; //true --> firefighter looks right 
+	
 	
 
 	Firefighter() {
@@ -52,9 +54,11 @@ public class Firefighter implements Entity {
 	public void onKeyDown(int keycode) {
 		if (keycode == KeyEvent.VK_LEFT) {
 			keyLeft = true;
+			direction = false;
 		}
 		if (keycode == KeyEvent.VK_RIGHT) {
 			keyRight = true;
+			direction = true;
 		}
 	}
 
@@ -69,9 +73,19 @@ public class Firefighter implements Entity {
 
 	@Override
 	public void onDraw(Graphics g) {
-			g.drawImage(image, Variabelen.XFirefighter1 + (int) (positie.getX()), Variabelen.YFirefighter1 + (int) (positie.getY()),
-					Variabelen.XFirefighter2 + (int) (positie.getX()), Variabelen.YFirefighter2 + (int) (positie.getY()), Variabelen.sourceX1,
+		if(direction == false) {
+			g.drawImage(image, Variabelen.XFirefighter2+ (int) (positie.getX()), Variabelen.YFirefighter1 + (int) (positie.getY()),
+					Variabelen.XFirefighter1 + (int) (positie.getX()), Variabelen.YFirefighter2 + (int) (positie.getY()), Variabelen.sourceX1,
 					Variabelen.sourceY1, Variabelen.sourceXFirefighter2, Variabelen.sourceYFirefighter2, null);
+			 boundingBox.x = boundingBox.x -20;
+			
+		}
+		if(direction == true) {
+			g.drawImage(image, Variabelen.XFirefighter1 + (int) (positie.getX()), Variabelen.YFirefighter1 + (int) (positie.getY()),
+				Variabelen.XFirefighter2 + (int) (positie.getX()), Variabelen.YFirefighter2 + (int) (positie.getY()), Variabelen.sourceX1,
+				Variabelen.sourceY1, Variabelen.sourceXFirefighter2, Variabelen.sourceYFirefighter2, null);
+
+		}
 			
 		
 	}

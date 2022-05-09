@@ -4,11 +4,13 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.JButton;
 
 public class Score implements Entity {
 
@@ -24,6 +26,7 @@ public class Score implements Entity {
 	Color myColor = new Color(255, 255, 255, 127);
 	Font myFont1 = new Font("Arial", Font.BOLD, 12);
 	Font myFont2 = new Font("Arial", Font.BOLD, 17);
+	JButton button2; 
 
 	public Score(int score, int highScore, int lives) {
 		super();
@@ -73,7 +76,7 @@ public class Score implements Entity {
 
 	@Override
 	public void onDraw(Graphics g) {
-
+		
 		g.setColor(Color.white);
 		g.fillRect(5, 5, 120, 35);
 		g.fillRect(Variabelen.BreedteScherm - 125, 5, 120, 20);
@@ -94,7 +97,7 @@ public class Score implements Entity {
 			g.setColor(Color.black);
 			g.setFont(myFont2);
 			g.drawString("Highscore:"+" "+Integer.toString(highScore), (Variabelen.BreedteScherm / 2) - 70, ((Variabelen.HoogteScherm * 2) / 3) + 20);
-
+			button2 = new JButton("Restart");
 		}
 		
 

@@ -17,14 +17,14 @@ import javax.swing.border.Border;
 public class Main extends JPanel implements ActionListener {
 	private Timer timer;
 	private long prevTime = 0;
-	private GameManager gameManager;
+	private MenuManager menuManager;
 	
 	JLabel Score;
 	JLabel Lives;
 
 	public Main() {
-		gameManager = new GameManager();
-		addKeyListener(gameManager);
+		menuManager = new MenuManager();
+		addKeyListener(menuManager);
 		
 		setFocusable(true);
 		timer = new Timer(Variabelen.UPDATE_SPEED, this);
@@ -84,14 +84,14 @@ public class Main extends JPanel implements ActionListener {
 		long deltaTime = prevTime == 0 ? 0 : currTime - prevTime;
 		prevTime = currTime;
 		
-		gameManager.onUpdate(deltaTime);
+		menuManager.onUpdate(deltaTime);
 		repaint();
 	}
 
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		gameManager.onDraw(g);
+		menuManager.onDraw(g);
 		
 	}
 	

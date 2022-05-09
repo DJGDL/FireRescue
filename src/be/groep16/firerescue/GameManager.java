@@ -9,7 +9,7 @@ import java.util.Iterator;
 
 import java.util.Stack;
 
-public class GameManager implements KeyListener {
+public class GameManager implements Menu {
 	private static final int ROCK_ID = 0;
 	private static final int FIRE_ID = 1;
 	private static final int DROPLET_ID = 2;
@@ -27,6 +27,8 @@ public class GameManager implements KeyListener {
 	private int lives = 3;
 	private int score = 0;
 	private int highScore = 0;
+	
+	private boolean isDead;
 
 	private Entity getNewEntity(int id) {
 
@@ -65,6 +67,8 @@ public class GameManager implements KeyListener {
 			activeEntity.add(new ArrayList<>());
 			nonActiveEntity.add(new Stack<>());
 		}
+		
+		reset(0);
 	}
 
 	public void onUpdate(long deltaTime) {
@@ -187,10 +191,47 @@ public class GameManager implements KeyListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		player.onKeyDown(e.getKeyCode());
+		
+		if (e.getKeyCode() == KeyEvent.VK_SPACE && lives <= 0) {
+			isDead = true;
+		}
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
 		player.onKeyUp(e.getKeyCode());
+	}
+
+	@Override
+	public Rectangle getBoundingBox() {
+		return null;
+	}
+	
+	@Override
+	public void reset(float difficulty) {
+		COUNT_DOWN = 0;
+		player.reset(difficulty);
+		isDead = false;
+		lives = 3;
+		score = 0;
+		highScore = 0;
+		
+		for (int i = 0; i < activeEntity.size(); i++) {
+			for (Iterator<Entity> it = activeEntity.get(i).iterator(); it.hasNext();) {
+				Entity entity = it.next();
+				it.remove();
+				nonActiveEntity.get(i).add(entity);
+			}
+		}
+	}
+
+	@Override
+	public NextMenu nextMenu() {
+		return NextMenu.START_MENU;
+	}
+
+	@Override
+	public boolean isDead() {
+		return isDead;
 	}
 }

@@ -18,6 +18,13 @@ public class Firefighter implements Entity {
 	private boolean keyLeft = false;
 	private boolean keyRight = false;
 	
+	public int XFirefighter1 = Variabelen.BreedteScherm / 2 - Variabelen.BreedteFirefighter / 2;
+	public int XFirefighter2 = Variabelen.BreedteScherm / 2 + Variabelen.BreedteFirefighter / 2;
+	public static final int YFirefighter1 = Variabelen.HoogteScherm - Variabelen.HoogteFirefighter;
+	public static final int YFirefighter2 = Variabelen.HoogteScherm;
+	public static final int sourceXFirefighter2 = 57;
+	public static final int sourceYFirefighter2 = 100;
+	
 	
 
 	Firefighter() {
@@ -45,8 +52,8 @@ public class Firefighter implements Entity {
 		if (keyLeft && positie.getX() > 2 - Variabelen.BreedteScherm / 2)
 			positie = positie.add(-speed*deltaTime/10, 0);
 		
-		boundingBox.x = Variabelen.XFirefighter1 + 20 + (int) positie.getX();
-		boundingBox.y = Variabelen.YFirefighter1 + (int) positie.getY();
+		boundingBox.x = XFirefighter1 + 20 + (int) positie.getX();
+		boundingBox.y = YFirefighter1 + (int) positie.getY();
 	}
 
 	public void onKeyDown(int keycode) {
@@ -69,9 +76,9 @@ public class Firefighter implements Entity {
 
 	@Override
 	public void onDraw(Graphics g) {
-			g.drawImage(image, Variabelen.XFirefighter1 + (int) (positie.getX()), Variabelen.YFirefighter1 + (int) (positie.getY()),
-					Variabelen.XFirefighter2 + (int) (positie.getX()), Variabelen.YFirefighter2 + (int) (positie.getY()), Variabelen.sourceX1,
-					Variabelen.sourceY1, Variabelen.sourceXFirefighter2, Variabelen.sourceYFirefighter2, null);
+			g.drawImage(image, XFirefighter1 + (int) (positie.getX()), YFirefighter1 + (int) (positie.getY()),
+					XFirefighter2 + (int) (positie.getX()), YFirefighter2 + (int) (positie.getY()), Variabelen.sourceX1,
+					Variabelen.sourceY1, sourceXFirefighter2, sourceYFirefighter2, null);
 			
 		
 	}
@@ -90,5 +97,10 @@ public class Firefighter implements Entity {
 	
 	public void setDifficulity(float difficulity) {
 		speed = (float) Math.min(1 + 0.005 * difficulity, 5);
+	}
+	
+	public void reset(float difficulty) {
+		XFirefighter1 = Variabelen.BreedteScherm / 2 - Variabelen.BreedteFirefighter / 2;
+		XFirefighter2 = Variabelen.BreedteScherm / 2 + Variabelen.BreedteFirefighter / 2;
 	}
 }

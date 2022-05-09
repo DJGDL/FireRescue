@@ -4,11 +4,9 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Rectangle;
-import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
 
@@ -26,9 +24,10 @@ public class Score implements Entity {
 	Color myColor = new Color(255, 255, 255, 127);
 	Font myFont1 = new Font("Arial", Font.BOLD, 12);
 	Font myFont2 = new Font("Arial", Font.BOLD, 17);
+	Font myfont3 = new Font("Arial", Font.BOLD, 20);
 	JButton button2; 
 
-	public Score(int score, int highScore, int lives) {
+	public Score(int score, int highScore, int lives){
 		super();
 		this.score = score;
 		this.highScore = highScore;
@@ -97,7 +96,9 @@ public class Score implements Entity {
 			g.setColor(Color.black);
 			g.setFont(myFont2);
 			g.drawString("Highscore:"+" "+Integer.toString(highScore), (Variabelen.BreedteScherm / 2) - 70, ((Variabelen.HoogteScherm * 2) / 3) + 20);
-			button2 = new JButton("Restart");
+			g.setColor(Color.blue);
+			g.setFont(myfont3);
+			g.drawString("Press SPACE to restart", (Variabelen.BreedteScherm / 2) - 120, ((Variabelen.HoogteScherm * 2) / 3) + 60);
 		}
 		
 
@@ -108,5 +109,8 @@ public class Score implements Entity {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
+
 
 }

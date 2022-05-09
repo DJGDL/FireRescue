@@ -195,6 +195,8 @@ public class GameManager implements Menu {
 		if (e.getKeyCode() == KeyEvent.VK_SPACE && lives <= 0) {
 			isDead = true;
 		}
+		
+		
 	}
 
 	@Override

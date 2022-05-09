@@ -18,12 +18,16 @@ public class Firefighter implements Entity {
 	private boolean keyLeft = false;
 	private boolean keyRight = false;
 	
+
 	public int XFirefighter1 = Variabelen.BreedteScherm / 2 - Variabelen.BreedteFirefighter / 2;
 	public int XFirefighter2 = Variabelen.BreedteScherm / 2 + Variabelen.BreedteFirefighter / 2;
 	public static final int YFirefighter1 = Variabelen.HoogteScherm - Variabelen.HoogteFirefighter;
 	public static final int YFirefighter2 = Variabelen.HoogteScherm;
 	public static final int sourceXFirefighter2 = 57;
 	public static final int sourceYFirefighter2 = 100;
+
+	public boolean direction = true; //true --> firefighter looks right 
+
 	
 	
 
@@ -51,17 +55,25 @@ public class Firefighter implements Entity {
 
 		if (keyLeft && positie.getX() > 2 - Variabelen.BreedteScherm / 2)
 			positie = positie.add(-speed*deltaTime/10, 0);
+		if(direction == true) {
+			boundingBox.x = XFirefighter1 + 20 + (int) positie.getX();
+			boundingBox.y = YFirefighter1 + (int) positie.getY();
+		}
+		if(direction == false) {
+			boundingBox.x = XFirefighter1 + (int) positie.getX();
+			boundingBox.y = YFirefighter1 + (int) positie.getY();
+		}
 		
-		boundingBox.x = XFirefighter1 + 20 + (int) positie.getX();
-		boundingBox.y = YFirefighter1 + (int) positie.getY();
 	}
 
 	public void onKeyDown(int keycode) {
 		if (keycode == KeyEvent.VK_LEFT) {
 			keyLeft = true;
+			direction = false;
 		}
 		if (keycode == KeyEvent.VK_RIGHT) {
 			keyRight = true;
+			direction = true;
 		}
 	}
 
@@ -76,9 +88,26 @@ public class Firefighter implements Entity {
 
 	@Override
 	public void onDraw(Graphics g) {
-			g.drawImage(image, XFirefighter1 + (int) (positie.getX()), YFirefighter1 + (int) (positie.getY()),
+
+			
+	/*
+	 *g.drawImage(image, XFirefighter1 + (int) (positie.getX()), YFirefighter1 + (int) (positie.getY()),
+					XFirefighter2 + (int) (positie.getX()), YFirefighter2 + (int) (positie.getY()), Variabelen.sourceX1,
+					Variabelen.sourceY1, sourceXFirefighter2, sourceYFirefighter2, null); 
+	 */
+			if(direction == false) {
+				g.drawImage(image, XFirefighter2+ (int) (positie.getX()), YFirefighter1 + (int) (positie.getY()),
+						XFirefighter1 + (int) (positie.getX()), YFirefighter2 + (int) (positie.getY()), Variabelen.sourceX1,
+						Variabelen.sourceY1, sourceXFirefighter2, sourceYFirefighter2, null);
+				
+			}
+			if(direction == true) {
+				g.drawImage(image, XFirefighter1 + (int) (positie.getX()), YFirefighter1 + (int) (positie.getY()),
 					XFirefighter2 + (int) (positie.getX()), YFirefighter2 + (int) (positie.getY()), Variabelen.sourceX1,
 					Variabelen.sourceY1, sourceXFirefighter2, sourceYFirefighter2, null);
+				
+			}
+
 			
 		
 	}

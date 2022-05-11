@@ -10,12 +10,18 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 public class StartMenu implements Menu {
 
 	private static BufferedImage image;
 	
 	private boolean isDead = false;
+	private Clip music;
 
 	private static final int srcX2 = 401;
 	private static final int srcY2 = 660;
@@ -24,6 +30,7 @@ public class StartMenu implements Menu {
 	private final Font myFont2 = new Font("Bauhaus 93", Font.BOLD, 38);
 
 	public StartMenu() {
+		playMusic();
 		reset(0);
 		
 		if (image == null) {
@@ -34,6 +41,20 @@ public class StartMenu implements Menu {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+		}
+	}
+	
+	private void playMusic() {
+		File soundFile = new File("gameMusic3.wav");
+		try {
+			music = AudioSystem.getClip();
+			AudioInputStream inputStream = AudioSystem.getAudioInputStream(soundFile);
+			music.open(inputStream);
+			music.loop(Clip.LOOP_CONTINUOUSLY);
+			music.stop();
+		} catch (LineUnavailableException | UnsupportedAudioFileException | IOException e) {
+			System.err.println("Couldn't load music in start menu");
+			e.printStackTrace();
 		}
 	}
 
@@ -48,7 +69,7 @@ public class StartMenu implements Menu {
 		g.setColor(Color.white);
 		g.drawImage(image, 0, 0, Variabelen.BreedteScherm, Variabelen.HoogteScherm, 0, 0, srcX2, srcY2, null);
 		g.setFont(myFont1);
-		g.drawString("Press Space", Variabelen.BreedteScherm/3, Variabelen.HoogteScherm/3);
+		g.drawString("Press Space to start", Variabelen.BreedteScherm/3, Variabelen.HoogteScherm/3);
 		g.setFont(myFont2);
 		g.drawString("Brandweerman Tom", Variabelen.BreedteScherm / 10, Variabelen.HoogteScherm / 4);
 	}
@@ -68,6 +89,7 @@ public class StartMenu implements Menu {
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
 			isDead = true;
+			music.stop();
 		}
 	}
 
@@ -85,6 +107,7 @@ public class StartMenu implements Menu {
 	@Override
 	public void reset(float difficulty) {
 		isDead = false;
+		music.start();
 	}
 
 	@Override

@@ -3,9 +3,16 @@ package be.groep16.firerescue;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.IOException;
 
-public class MenuManager implements Menu {
-	
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+
+public class MenuManager implements Menu {	
 	private Menu activeMenu;
 	private final GameManager gameManager;
 	private final StartMenu startMenu;
@@ -15,7 +22,11 @@ public class MenuManager implements Menu {
 		startMenu = new StartMenu();
 		
 		activeMenu = startMenu;
+		
+		
 	}
+	
+	
 
 	@Override
 	public void keyTyped(KeyEvent e) {

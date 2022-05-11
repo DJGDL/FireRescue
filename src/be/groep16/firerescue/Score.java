@@ -24,7 +24,6 @@ public class Score implements Entity {
 	Color myColor = new Color(255, 255, 255, 127);
 	Font myFont1 = new Font("Arial", Font.BOLD, 12);
 	Font myFont2 = new Font("Arial", Font.BOLD, 17);
-	Font myfont3 = new Font("Arial", Font.BOLD, 20);
 	JButton button2; 
 
 	public Score(int score, int highScore, int lives){
@@ -95,10 +94,9 @@ public class Score implements Entity {
 					0, 0, sourceGameOverX2, sourceGameOverY2, null);
 			g.setColor(Color.black);
 			g.setFont(myFont2);
-			g.drawString("Highscore:"+" "+Integer.toString(highScore), (Variabelen.BreedteScherm / 2) - 70, ((Variabelen.HoogteScherm * 2) / 3) + 20);
+			g.drawString("Highscore:"+" "+Integer.toString(highScore), (Variabelen.BreedteScherm / 2) - 60, ((Variabelen.HoogteScherm * 2) / 3) + 20);
 			g.setColor(Color.blue);
-			g.setFont(myfont3);
-			g.drawString("Press SPACE to restart", (Variabelen.BreedteScherm / 2) - 120, ((Variabelen.HoogteScherm * 2) / 3) + 60);
+			g.drawString("Press SPACE to restart", (Variabelen.BreedteScherm / 2) - 100, ((Variabelen.HoogteScherm * 2) / 3) + 60);
 		}
 		
 

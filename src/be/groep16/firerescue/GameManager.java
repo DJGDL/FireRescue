@@ -3,7 +3,6 @@ package be.groep16.firerescue;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -77,8 +76,8 @@ public class GameManager implements Menu {
 		if (lives > 0) {
 			if (COUNT_DOWN <= 0) {
 				COUNT_DOWN = Variabelen.SPAWN_SPEED - (int) (5 * score);
-				if (COUNT_DOWN < 500) {
-					COUNT_DOWN = 500;
+				if (COUNT_DOWN < 250) {
+					COUNT_DOWN = 250;
 				}
 				int chance = Variabelen.RANDOM.nextInt(85);
 				if (chance < 40)
@@ -195,8 +194,6 @@ public class GameManager implements Menu {
 		if (e.getKeyCode() == KeyEvent.VK_SPACE && lives <= 0) {
 			isDead = true;
 		}
-		
-		
 	}
 
 	@Override

@@ -7,16 +7,11 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 
-public class Rock implements Entity {
+public class GreatRock implements Entity {
 	private static BufferedImage image;
 
-	public static final int YRock1 = -Variabelen.HoogteRock;
+	public static final int YRock1 = -Variabelen.HoogteRock * 2;
 	public static final int YRock2 = 0;
 	public static final int sourceXRock2 = 1378;
 	public static final int sourceYRock2 = 1378;
@@ -26,14 +21,14 @@ public class Rock implements Entity {
 	private Vector positie;
 	private float velocity;
 
-	public Rock() {
+	public GreatRock() {
 		reset(0);
 
 		if (image == null) {
-			File rock = new File("Steen.png");
+			File greatRock = new File("Steen.png");
 
 			try {
-				image = ImageIO.read(rock);
+				image = ImageIO.read(greatRock);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -57,12 +52,12 @@ public class Rock implements Entity {
 
 	@Override
 	public void reset(float difficulty) {
-		xRock1 = Variabelen.RANDOM.nextInt(Variabelen.BreedteScherm - Variabelen.BreedteRock);
-		xRock2 = xRock1 + Variabelen.BreedteRock;
+		xRock1 = Variabelen.RANDOM.nextInt(Variabelen.BreedteScherm - (Variabelen.BreedteRock * 2));
+		xRock2 = xRock1 + Variabelen.BreedteRock * 2;
 
 		positie = new Vector(0, 0);
 		if (velocity < 5) {
-			velocity = 1.3f + 0.001f * difficulty;
+			velocity = 1f + 0.001f * difficulty;
 		}
 	}
 
@@ -73,10 +68,12 @@ public class Rock implements Entity {
 
 	@Override
 	public Rectangle getBoundingBox() {
-		Rectangle r = new Rectangle((int)((Variabelen.BreedteRock*2)/5), (int)((Variabelen.HoogteRock*2)/5));
-		r.x = xRock1 + (int)((Variabelen.BreedteRock*3)/10) + (int) positie.getX();
-		r.y = YRock1 + (int)((Variabelen.HoogteRock*3)/10) + (int) positie.getY();
+		Rectangle r = new Rectangle((int)((Variabelen.BreedteRock*4)/5), (int)((Variabelen.HoogteRock*4)/5));
+		r.x = xRock1 + (int)((Variabelen.BreedteRock*6)/10) + (int) positie.getX();
+		r.y = YRock1 + (int)((Variabelen.HoogteRock*6)/10) + (int) positie.getY();
 		
 		return r;
 	}
 }
+
+

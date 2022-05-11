@@ -3,16 +3,25 @@ package be.groep16.firerescue;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
 import java.util.Stack;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 public class GameManager implements Menu {
 	private static final int ROCK_ID = 0;
 	private static final int FIRE_ID = 1;
 	private static final int DROPLET_ID = 2;
 	private static final int GOLDEN_DROPLET_ID = 3;
+	private static final int GreatROCK_ID = 4;
 
 	private ArrayList<ArrayList<Entity>> activeEntity;
 	private ArrayList<Stack<Entity>> nonActiveEntity;
@@ -28,6 +37,11 @@ public class GameManager implements Menu {
 	private int highScore = 0;
 	
 	private boolean isDead;
+	
+	private Clip musicRock;
+	private Clip musicDroplet;
+	private Clip musicGoldenDroplet;
+	private Clip musicFire;
 
 	private Entity getNewEntity(int id) {
 
@@ -44,6 +58,7 @@ public class GameManager implements Menu {
 			case FIRE_ID -> new Fire();
 			case DROPLET_ID -> new Droplet();
 			case GOLDEN_DROPLET_ID -> new GoldenDroplet();
+			case GreatROCK_ID -> new GreatRock();
 			default -> throw new IllegalArgumentException("Unexpected value: " + id);
 			};
 			entity.reset(score);
@@ -52,6 +67,58 @@ public class GameManager implements Menu {
 			return entity;
 		}
 
+	}
+	public void playRockSound() {
+		File soundFile = new File("RockSound.wav");
+		try {
+			musicRock = AudioSystem.getClip();
+			AudioInputStream inputStream = AudioSystem.getAudioInputStream(soundFile);
+			musicRock.open(inputStream);
+			musicRock.start();
+			
+		} catch (LineUnavailableException | UnsupportedAudioFileException | IOException e) {
+			System.err.println("Couldn't load music in GameManager(Rock)");
+			e.printStackTrace();
+		}
+	}
+	public void playDropletSound() {
+		File soundFile = new File("DropletSound.wav");
+		try {
+			musicDroplet = AudioSystem.getClip();
+			AudioInputStream inputStream = AudioSystem.getAudioInputStream(soundFile);
+			musicDroplet.open(inputStream);
+			musicDroplet.start();
+			
+		} catch (LineUnavailableException | UnsupportedAudioFileException | IOException e) {
+			System.err.println("Couldn't load music in GameManager(Droplet)");
+			e.printStackTrace();
+		}
+	}
+	public void playGoldenDropletSound() {
+		File soundFile = new File("GoldenDropletSound.wav");
+		try {
+			musicGoldenDroplet = AudioSystem.getClip();
+			AudioInputStream inputStream = AudioSystem.getAudioInputStream(soundFile);
+			musicGoldenDroplet.open(inputStream);
+			musicGoldenDroplet.start();
+			
+		} catch (LineUnavailableException | UnsupportedAudioFileException | IOException e) {
+			System.err.println("Couldn't load music in GameManager(Droplet)");
+			e.printStackTrace();
+		}
+	}
+	public void playFireSound() {
+		File soundFile = new File("FireballSound.wav");
+		try {
+			musicFire = AudioSystem.getClip();
+			AudioInputStream inputStream = AudioSystem.getAudioInputStream(soundFile);
+			musicFire.open(inputStream);
+			musicFire.start();
+			
+		} catch (LineUnavailableException | UnsupportedAudioFileException | IOException e) {
+			System.err.println("Couldn't load music in GameManager(Droplet)");
+			e.printStackTrace();
+		}
 	}
 
 	public GameManager() {
@@ -62,7 +129,7 @@ public class GameManager implements Menu {
 		activeEntity = new ArrayList<>();
 		nonActiveEntity = new ArrayList<>();
 
-		for (int id = 0; id < 4; id++) {
+		for (int id = 0; id < 5; id++) {
 			activeEntity.add(new ArrayList<>());
 			nonActiveEntity.add(new Stack<>());
 		}
@@ -79,17 +146,17 @@ public class GameManager implements Menu {
 				if (COUNT_DOWN < 250) {
 					COUNT_DOWN = 250;
 				}
-				int chance = Variabelen.RANDOM.nextInt(85);
+				int chance = Variabelen.RANDOM.nextInt(200);
 				if (chance < 40)
 					getNewEntity(ROCK_ID);
 				if (chance >= 40 && chance < 50)
 					getNewEntity(FIRE_ID);
 				if (chance >= 50 && chance < 80)
 					getNewEntity(DROPLET_ID);
-				if (chance >= 80)
+				if (chance >= 80 && chance < 85)
 					getNewEntity(GOLDEN_DROPLET_ID);
-				
-
+				if (chance >= 85)
+					getNewEntity(GreatROCK_ID);
 			}
 
 			player.setDifficulity(score);
@@ -114,18 +181,25 @@ public class GameManager implements Menu {
 					if (player.getBoundingBox().intersects(e.getBoundingBox())) {
 						if (e instanceof Rock) {
 							lives--;
-							if (score > 0) {
-								score -= 15;
+							playRockSound();
+							if (score >= 15) {
+								score -= 15;	
+							}if (score < 15) {
+								score = 0;	
 							}
-
+							
 						} else if (e instanceof Fire) {
 							lives--;
-							if (score > 0) {
+							playFireSound();
+							if (score >= 5) {
 								score -= 5;
+							}if (score < 5) {
+								score = 0;	
 							}
 
 						} else if (e instanceof Droplet) {
 							score += 10;
+							playDropletSound();
 							if (highScore < score) {
 								highScore = score;
 							}
@@ -134,8 +208,18 @@ public class GameManager implements Menu {
 								lives++;
 							}
 							score += 20;
+							playGoldenDropletSound();
 							if (highScore < score) {
 								highScore = score;
+							}
+							
+						} else if (e instanceof GreatRock) {
+							lives = lives - 2;
+							playRockSound();
+							if (score >= 100) {
+								score -= 100;	
+							}if (score < 100) {
+								score = 0;	
 							}
 						}
 

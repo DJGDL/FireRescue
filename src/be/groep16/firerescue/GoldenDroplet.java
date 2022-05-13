@@ -3,8 +3,8 @@ package be.groep16.firerescue;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 import javax.imageio.ImageIO;
 
@@ -25,7 +25,8 @@ public class GoldenDroplet implements Entity {
 		reset(0);
 
 		if (image == null) {
-			File goldenDroplet = new File("GoldenDroplet.png");
+			// File goldenDroplet = new File("GoldenDroplet.png");
+			URL goldenDroplet = getClass().getResource("GoldenDroplet.png");
 
 			try {
 				image = ImageIO.read(goldenDroplet);
@@ -54,9 +55,7 @@ public class GoldenDroplet implements Entity {
 		xSmileDroplet2 = xSmileDroplet1 + Variabelen.BreedteDroplet;
 
 		positie = new Vector(0, 0);
-		if (velocity < 9) {
-			velocity = 1f + 0.005f * difficulty;
-		}
+		velocity = Math.min(1.5f + 0.00055f * difficulty, 7);
 	}
 
 	@Override
@@ -69,7 +68,7 @@ public class GoldenDroplet implements Entity {
 		Rectangle r = new Rectangle(Variabelen.BreedteDroplet, Variabelen.HoogteDroplet);
 		r.x = xSmileDroplet1 + (int) positie.getX();
 		r.y = YSmileDroplet1 + (int) positie.getY();
-		
+
 		return r;
 	}
 }

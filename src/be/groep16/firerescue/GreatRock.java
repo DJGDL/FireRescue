@@ -3,8 +3,8 @@ package be.groep16.firerescue;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 import javax.imageio.ImageIO;
 
@@ -25,7 +25,8 @@ public class GreatRock implements Entity {
 		reset(0);
 
 		if (image == null) {
-			File greatRock = new File("Steen.png");
+			// File greatRock = new File("Steen.png");
+			URL greatRock = getClass().getResource("Steen.png");
 
 			try {
 				image = ImageIO.read(greatRock);
@@ -34,7 +35,6 @@ public class GreatRock implements Entity {
 			}
 		}
 	}
-	
 
 	@Override
 	public void onUpdate(long deltaTime) {
@@ -56,9 +56,7 @@ public class GreatRock implements Entity {
 		xRock2 = xRock1 + Variabelen.BreedteRock * 2;
 
 		positie = new Vector(0, 0);
-		if (velocity < 5) {
-			velocity = 1f + 0.001f * difficulty;
-		}
+		velocity = Math.min(1f + 0.0003f * difficulty, 4);
 	}
 
 	@Override
@@ -68,12 +66,10 @@ public class GreatRock implements Entity {
 
 	@Override
 	public Rectangle getBoundingBox() {
-		Rectangle r = new Rectangle((int)((Variabelen.BreedteRock*4)/5), (int)((Variabelen.HoogteRock*4)/5));
-		r.x = xRock1 + (int)((Variabelen.BreedteRock*6)/10) + (int) positie.getX();
-		r.y = YRock1 + (int)((Variabelen.HoogteRock*6)/10) + (int) positie.getY();
-		
+		Rectangle r = new Rectangle((int) ((Variabelen.BreedteRock * 4) / 5), (int) ((Variabelen.HoogteRock * 4) / 5));
+		r.x = xRock1 + (int) ((Variabelen.BreedteRock * 6) / 10) + (int) positie.getX();
+		r.y = YRock1 + (int) ((Variabelen.HoogteRock * 6) / 10) + (int) positie.getY();
+
 		return r;
 	}
 }
-
-

@@ -3,8 +3,8 @@ package be.groep16.firerescue;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
-import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -35,13 +35,44 @@ public class GameManager implements Menu {
 	private int lives = 3;
 	private int score = 0;
 	private int highScore = 0;
-	
+
 	private boolean isDead;
-	
+
 	private Clip musicRock;
 	private Clip musicDroplet;
 	private Clip musicGoldenDroplet;
 	private Clip musicFire;
+	private Clip gameMusic;
+
+	/*
+	 * private final float[] difficultyJumps = { 10, 100, 200, 400, 1000, 1500, 2000
+	 * }; private final float[] difficultyHeights = { 10, 10, 10, 10, 10, 10, 10 };
+	 * private final float[] difficultyWidth = { 10, 10, 10, 10, 10, 10, 10 };
+	 */
+
+	/*
+	 * private float calculateDifficulty() { /*float scaledScore = ((float) score) *
+	 * 1f; float result = 0; for (int i = 0; i < difficultyJumps.length; i++) {
+	 * result += difficultyHeights[i] * Math.exp(scaledScore * difficultyWidth[i] -
+	 * difficultyJumps[i]) / (Math.exp(scaledScore * difficultyWidth[i] -
+	 * difficultyJumps[i]) + 1f); }
+	 * 
+	 * return result;*
+	 * 
+	 * final float jumpHeight = 100; final float jumpWidth = 20; final float
+	 * jumpDelay = 20; final float period = 100;
+	 * 
+	 * float result = 0;
+	 * 
+	 * int numberOfPastPeriods = (int) (score/period); float remaining = score %
+	 * period;
+	 * 
+	 * result += numberOfPastPeriods * jumpHeight; result += jumpHeight *
+	 * Math.exp(remaining * jumpWidth - jumpDelay) / (Math.exp(remaining * jumpWidth
+	 * - jumpDelay) + 1f);
+	 * 
+	 * return result; }
+	 */
 
 	private Entity getNewEntity(int id) {
 
@@ -66,55 +97,83 @@ public class GameManager implements Menu {
 
 			return entity;
 		}
+	}
+
+	private void playGameMusic() {
+		URL soundFile = getClass().getResource("gameMusic3.wav");
+		// File soundFile = new
+		// File(getClass().getResource("gameMusic3.wav").getFile());
+		try {
+			gameMusic = AudioSystem.getClip();
+			AudioInputStream inputStream = AudioSystem.getAudioInputStream(soundFile);
+			gameMusic.open(inputStream);
+			gameMusic.loop(Clip.LOOP_CONTINUOUSLY);
+			gameMusic.stop();
+		} catch (LineUnavailableException | UnsupportedAudioFileException | IOException e) {
+			System.err.println("Couldn't load music in start menu");
+			e.printStackTrace();
+		}
 
 	}
+
 	public void playRockSound() {
-		File soundFile = new File("RockSound.wav");
+		URL soundFile = getClass().getResource("RockSound.wav");
+		// File soundFile = new File(getClass().getResource("RockSound.wav").getFile());
 		try {
 			musicRock = AudioSystem.getClip();
 			AudioInputStream inputStream = AudioSystem.getAudioInputStream(soundFile);
 			musicRock.open(inputStream);
 			musicRock.start();
-			
+
 		} catch (LineUnavailableException | UnsupportedAudioFileException | IOException e) {
 			System.err.println("Couldn't load music in GameManager(Rock)");
 			e.printStackTrace();
 		}
 	}
+
 	public void playDropletSound() {
-		File soundFile = new File("DropletSound.wav");
+		URL soundFile = getClass().getResource("DropletSound.wav");
+		// File soundFile = new
+		// File(getClass().getResource("DropletSound.wav").getFile());
 		try {
 			musicDroplet = AudioSystem.getClip();
 			AudioInputStream inputStream = AudioSystem.getAudioInputStream(soundFile);
 			musicDroplet.open(inputStream);
 			musicDroplet.start();
-			
+
 		} catch (LineUnavailableException | UnsupportedAudioFileException | IOException e) {
 			System.err.println("Couldn't load music in GameManager(Droplet)");
 			e.printStackTrace();
 		}
 	}
+
 	public void playGoldenDropletSound() {
-		File soundFile = new File("GoldenDropletSound.wav");
+		// File soundFile = new File("GoldenDropletSound.wav");
+		URL soundFile = getClass().getResource("GoldenDropletSound.wav");
+		// File soundFile = new
+		// File(getClass().getResource("GoldenDropletSound.wav").getFile());
 		try {
 			musicGoldenDroplet = AudioSystem.getClip();
 			AudioInputStream inputStream = AudioSystem.getAudioInputStream(soundFile);
 			musicGoldenDroplet.open(inputStream);
 			musicGoldenDroplet.start();
-			
+
 		} catch (LineUnavailableException | UnsupportedAudioFileException | IOException e) {
 			System.err.println("Couldn't load music in GameManager(Droplet)");
 			e.printStackTrace();
 		}
 	}
+
 	public void playFireSound() {
-		File soundFile = new File("FireballSound.wav");
+		URL soundFile = getClass().getResource("FireballSound.wav");
+		// File soundFile = new
+		// File(getClass().getResource("FireballSound.wav").getFile());
 		try {
 			musicFire = AudioSystem.getClip();
 			AudioInputStream inputStream = AudioSystem.getAudioInputStream(soundFile);
 			musicFire.open(inputStream);
 			musicFire.start();
-			
+
 		} catch (LineUnavailableException | UnsupportedAudioFileException | IOException e) {
 			System.err.println("Couldn't load music in GameManager(Droplet)");
 			e.printStackTrace();
@@ -122,6 +181,7 @@ public class GameManager implements Menu {
 	}
 
 	public GameManager() {
+
 		building = new Building();
 		player = new Firefighter();
 		scoreEntity = new Score(0, 0, 0);
@@ -133,8 +193,9 @@ public class GameManager implements Menu {
 			activeEntity.add(new ArrayList<>());
 			nonActiveEntity.add(new Stack<>());
 		}
-		
-		reset(0);
+		playGameMusic();
+		// reset(0);
+
 	}
 
 	public void onUpdate(long deltaTime) {
@@ -142,11 +203,10 @@ public class GameManager implements Menu {
 
 		if (lives > 0) {
 			if (COUNT_DOWN <= 0) {
-				COUNT_DOWN = Variabelen.SPAWN_SPEED - (int) (5 * score);
-				if (COUNT_DOWN < 250) {
-					COUNT_DOWN = 250;
-				}
-				int chance = Variabelen.RANDOM.nextInt(200);
+				score += 5; // increase score with time
+
+				COUNT_DOWN = Math.max(Variabelen.SPAWN_SPEED - score, 300);
+				int chance = Variabelen.RANDOM.nextInt(86);
 				if (chance < 40)
 					getNewEntity(ROCK_ID);
 				if (chance >= 40 && chance < 50)
@@ -182,45 +242,22 @@ public class GameManager implements Menu {
 						if (e instanceof Rock) {
 							lives--;
 							playRockSound();
-							if (score >= 15) {
-								score -= 15;	
-							}if (score < 15) {
-								score = 0;	
-							}
-							
 						} else if (e instanceof Fire) {
 							lives--;
 							playFireSound();
-							if (score >= 5) {
-								score -= 5;
-							}if (score < 5) {
-								score = 0;	
-							}
-
 						} else if (e instanceof Droplet) {
-							score += 10;
+							score += 50;
 							playDropletSound();
-							if (highScore < score) {
-								highScore = score;
-							}
 						} else if (e instanceof GoldenDroplet) {
-							if (lives < 3) {
+							if (lives < 4) {
 								lives++;
 							}
-							score += 20;
+							score += 100;
 							playGoldenDropletSound();
-							if (highScore < score) {
-								highScore = score;
-							}
-							
+
 						} else if (e instanceof GreatRock) {
-							lives = lives - 2;
+							lives -= 2;
 							playRockSound();
-							if (score >= 100) {
-								score -= 100;	
-							}if (score < 100) {
-								score = 0;	
-							}
 						}
 
 						if (Variabelen.DEBUG_MODE) {
@@ -237,7 +274,6 @@ public class GameManager implements Menu {
 		}
 
 		// update score ui
-		scoreEntity.setHighScore(highScore);
 		scoreEntity.setScore(score);
 		scoreEntity.setLives(lives);
 		scoreEntity.onUpdate(deltaTime);
@@ -268,15 +304,29 @@ public class GameManager implements Menu {
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-		// niet nodig
+		if (Variabelen.DEBUG_MODE) {
+			System.out.println(e.getKeyCode());
+			switch (e.getKeyChar()) {
+			case 'g' -> score += 500;
+			case 'l' -> lives = 4;
+			case 'd' -> lives = 0;
+			case 'a' -> getNewEntity(DROPLET_ID);
+			case 'z' -> getNewEntity(FIRE_ID);
+			case 'e' -> getNewEntity(GOLDEN_DROPLET_ID);
+			case 'r' -> getNewEntity(GreatROCK_ID);
+			case 't' -> getNewEntity(ROCK_ID);
+			}
+
+		}
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
 		player.onKeyDown(e.getKeyCode());
-		
+
 		if (e.getKeyCode() == KeyEvent.VK_SPACE && lives <= 0) {
 			isDead = true;
+			gameMusic.stop();
 		}
 	}
 
@@ -289,7 +339,7 @@ public class GameManager implements Menu {
 	public Rectangle getBoundingBox() {
 		return null;
 	}
-	
+
 	@Override
 	public void reset(float difficulty) {
 		COUNT_DOWN = 0;
@@ -298,7 +348,9 @@ public class GameManager implements Menu {
 		lives = 3;
 		score = 0;
 		highScore = 0;
-		
+		gameMusic.start();
+		gameMusic.loop(Clip.LOOP_CONTINUOUSLY);
+
 		for (int i = 0; i < activeEntity.size(); i++) {
 			for (Iterator<Entity> it = activeEntity.get(i).iterator(); it.hasNext();) {
 				Entity entity = it.next();
@@ -317,4 +369,13 @@ public class GameManager implements Menu {
 	public boolean isDead() {
 		return isDead;
 	}
+
+	public int getScore() {
+		return score;
+	}
+
+	public void setHighScore(int highScore) {
+		this.highScore = highScore;
+	}
+
 }

@@ -3,8 +3,8 @@ package be.groep16.firerescue;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 import javax.imageio.ImageIO;
 
@@ -25,7 +25,8 @@ public class Droplet implements Entity {
 		reset(0);
 
 		if (image == null) {
-			File droplet = new File("Druppel.png");
+			// File droplet = new File("Druppel.png");
+			URL droplet = getClass().getResource("Druppel.png");
 
 			try {
 				image = ImageIO.read(droplet);
@@ -56,9 +57,7 @@ public class Droplet implements Entity {
 		xDroplet2 = xDroplet1 + Variabelen.BreedteDroplet;
 
 		positie = new Vector(0, 0);
-		if (velocity < 8) {
-			velocity = 1f + 0.005f * difficulty;
-		}
+		velocity = Math.min(1.5f + 0.00055f * difficulty, 7);
 	}
 
 	public boolean isDead() {
@@ -70,9 +69,8 @@ public class Droplet implements Entity {
 		Rectangle r = new Rectangle(Variabelen.BreedteDroplet, Variabelen.HoogteDroplet);
 		r.x = xDroplet1 + (int) positie.getX();
 		r.y = YDroplet1 + (int) positie.getY();
-		
+
 		return r;
 	}
-
 
 }

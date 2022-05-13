@@ -3,30 +3,19 @@ package be.groep16.firerescue;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
-import java.io.File;
-import java.io.IOException;
 
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
-
-public class MenuManager implements Menu {	
+public class MenuManager implements Menu {
 	private Menu activeMenu;
 	private final GameManager gameManager;
 	private final StartMenu startMenu;
-	
+
 	public MenuManager() {
 		gameManager = new GameManager();
 		startMenu = new StartMenu();
-		
+
 		activeMenu = startMenu;
-		
-		
+		activeMenu.reset(0);
 	}
-	
-	
 
 	@Override
 	public void keyTyped(KeyEvent e) {
@@ -46,12 +35,18 @@ public class MenuManager implements Menu {
 	@Override
 	public void onUpdate(long deltaTime) {
 		activeMenu.onUpdate(deltaTime);
-		
+
 		if (activeMenu.isDead()) {
+			if (activeMenu instanceof GameManager) {
+				startMenu.setHighScore(((GameManager) activeMenu).getScore());
+			} else if (activeMenu instanceof StartMenu) {
+				gameManager.setHighScore(((StartMenu) activeMenu).getHighScore());
+			}
+
 			activeMenu = switch (activeMenu.nextMenu()) {
-				case GAME_MANAGER -> gameManager;
-				case START_MENU -> startMenu;
-				default -> throw new IllegalStateException();				
+			case GAME_MANAGER -> gameManager;
+			case START_MENU -> startMenu;
+			default -> throw new IllegalStateException();
 			};
 			activeMenu.reset(0);
 		}

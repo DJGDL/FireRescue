@@ -3,8 +3,8 @@ package be.groep16.firerescue;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 import javax.imageio.ImageIO;
 
@@ -19,13 +19,13 @@ public class Fire implements Entity {
 	private int xFire2 = 0;
 	private Vector positie;
 	private float velocity;
-	
 
 	public Fire() {
 		reset(0);
-		
+
 		if (image == null) {
-			File fire = new File("Vuurbal.png");
+			// File fire = new File("Vuurbal.png");
+			URL fire = getClass().getResource("Vuurbal.png");
 
 			try {
 				image = ImageIO.read(fire);
@@ -33,7 +33,7 @@ public class Fire implements Entity {
 				e.printStackTrace();
 			}
 		}
-		
+
 	}
 
 	@Override
@@ -56,9 +56,7 @@ public class Fire implements Entity {
 		xFire2 = xFire1 + Variabelen.BreedteFire;
 
 		positie = new Vector(0, 0);
-		if (velocity < 10) {
-			velocity = 1f + 0.01f * difficulty;
-		}
+		velocity = Math.min(1.5f + 0.00065f * difficulty, 8);
 	}
 
 	@Override
@@ -68,10 +66,10 @@ public class Fire implements Entity {
 
 	@Override
 	public Rectangle getBoundingBox() {
-		Rectangle r = new Rectangle(Variabelen.BreedteFire/3, (Variabelen.HoogteFire*3)/5);
-		r.x = xFire1 + Variabelen.BreedteFire/3;
-		r.y = YFire1 + (int)((Variabelen.HoogteFire*2)/5) + (int) positie.getY();
-		
+		Rectangle r = new Rectangle(Variabelen.BreedteFire / 3, (Variabelen.HoogteFire * 3) / 5);
+		r.x = xFire1 + Variabelen.BreedteFire / 3;
+		r.y = YFire1 + (int) ((Variabelen.HoogteFire * 2) / 5) + (int) positie.getY();
+
 		return r;
 	}
 }

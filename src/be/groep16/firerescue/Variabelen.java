@@ -30,7 +30,7 @@ public class Variabelen {
 	/*
 	 * Coördinaten Brandweerman
 	 */
-	
+
 	/*
 	 * Coördinaten van het gebouw
 	 */
@@ -47,5 +47,5 @@ public class Variabelen {
 	public static final int sourceY1 = 0;
 
 	public static final int UPDATE_SPEED = 10; // ms
-	public static final int SPAWN_SPEED = 3000; //ms
+	public static final int SPAWN_SPEED = 1900; // ms
 }

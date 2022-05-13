@@ -3,15 +3,10 @@ package be.groep16.firerescue;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 import javax.imageio.ImageIO;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 
 public class Rock implements Entity {
 	private static BufferedImage image;
@@ -30,7 +25,8 @@ public class Rock implements Entity {
 		reset(0);
 
 		if (image == null) {
-			File rock = new File("Steen.png");
+			// File rock = new File("Steen.png");
+			URL rock = getClass().getResource("Steen.png");
 
 			try {
 				image = ImageIO.read(rock);
@@ -39,7 +35,6 @@ public class Rock implements Entity {
 			}
 		}
 	}
-	
 
 	@Override
 	public void onUpdate(long deltaTime) {
@@ -61,9 +56,7 @@ public class Rock implements Entity {
 		xRock2 = xRock1 + Variabelen.BreedteRock;
 
 		positie = new Vector(0, 0);
-		if (velocity < 5) {
-			velocity = 1.3f + 0.001f * difficulty;
-		}
+		velocity = Math.min(1.5f + 0.00035f * difficulty, 5);
 	}
 
 	@Override
@@ -73,10 +66,10 @@ public class Rock implements Entity {
 
 	@Override
 	public Rectangle getBoundingBox() {
-		Rectangle r = new Rectangle((int)((Variabelen.BreedteRock*2)/5), (int)((Variabelen.HoogteRock*2)/5));
-		r.x = xRock1 + (int)((Variabelen.BreedteRock*3)/10) + (int) positie.getX();
-		r.y = YRock1 + (int)((Variabelen.HoogteRock*3)/10) + (int) positie.getY();
-		
+		Rectangle r = new Rectangle((int) ((Variabelen.BreedteRock * 2) / 5), (int) ((Variabelen.HoogteRock * 2) / 5));
+		r.x = xRock1 + (int) ((Variabelen.BreedteRock * 3) / 10) + (int) positie.getX();
+		r.y = YRock1 + (int) ((Variabelen.HoogteRock * 3) / 10) + (int) positie.getY();
+
 		return r;
 	}
 }

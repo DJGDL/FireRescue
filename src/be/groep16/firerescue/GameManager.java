@@ -34,6 +34,7 @@ public class GameManager implements Menu {
 
 	private int lives = 3;
 	private int score = 0;
+	@SuppressWarnings("unused")
 	private int highScore = 0;
 
 	private boolean isDead;
@@ -73,7 +74,13 @@ public class GameManager implements Menu {
 	 * 
 	 * return result; }
 	 */
-
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 * 
+	 * First search id entity in nonActiveEntity stack if size stack < 0 make a new entity
+	 */
 	private Entity getNewEntity(int id) {
 
 		if (nonActiveEntity.get(id).size() > 0) {
@@ -101,8 +108,6 @@ public class GameManager implements Menu {
 
 	private void playGameMusic() {
 		URL soundFile = getClass().getResource("gameMusic3.wav");
-		// File soundFile = new
-		// File(getClass().getResource("gameMusic3.wav").getFile());
 		try {
 			gameMusic = AudioSystem.getClip();
 			AudioInputStream inputStream = AudioSystem.getAudioInputStream(soundFile);
@@ -118,7 +123,6 @@ public class GameManager implements Menu {
 
 	public void playRockSound() {
 		URL soundFile = getClass().getResource("RockSound.wav");
-		// File soundFile = new File(getClass().getResource("RockSound.wav").getFile());
 		try {
 			musicRock = AudioSystem.getClip();
 			AudioInputStream inputStream = AudioSystem.getAudioInputStream(soundFile);
@@ -133,8 +137,6 @@ public class GameManager implements Menu {
 
 	public void playDropletSound() {
 		URL soundFile = getClass().getResource("DropletSound.wav");
-		// File soundFile = new
-		// File(getClass().getResource("DropletSound.wav").getFile());
 		try {
 			musicDroplet = AudioSystem.getClip();
 			AudioInputStream inputStream = AudioSystem.getAudioInputStream(soundFile);
@@ -148,10 +150,7 @@ public class GameManager implements Menu {
 	}
 
 	public void playGoldenDropletSound() {
-		// File soundFile = new File("GoldenDropletSound.wav");
 		URL soundFile = getClass().getResource("GoldenDropletSound.wav");
-		// File soundFile = new
-		// File(getClass().getResource("GoldenDropletSound.wav").getFile());
 		try {
 			musicGoldenDroplet = AudioSystem.getClip();
 			AudioInputStream inputStream = AudioSystem.getAudioInputStream(soundFile);
@@ -166,8 +165,6 @@ public class GameManager implements Menu {
 
 	public void playFireSound() {
 		URL soundFile = getClass().getResource("FireballSound.wav");
-		// File soundFile = new
-		// File(getClass().getResource("FireballSound.wav").getFile());
 		try {
 			musicFire = AudioSystem.getClip();
 			AudioInputStream inputStream = AudioSystem.getAudioInputStream(soundFile);
@@ -179,12 +176,16 @@ public class GameManager implements Menu {
 			e.printStackTrace();
 		}
 	}
-
+	/**
+	 * Starting up from all entity's, player and building
+	 * id = Amount of Entity's (5)
+	 * for loop: Makes an List and a stack for every entity in the active- and nonactiveentity
+	 */
 	public GameManager() {
 
 		building = new Building();
 		player = new Firefighter();
-		scoreEntity = new Score(0, 0, 0);
+		scoreEntity = new Score(0, 0);
 
 		activeEntity = new ArrayList<>();
 		nonActiveEntity = new ArrayList<>();
@@ -194,7 +195,6 @@ public class GameManager implements Menu {
 			nonActiveEntity.add(new Stack<>());
 		}
 		playGameMusic();
-		// reset(0);
 
 	}
 
@@ -202,10 +202,13 @@ public class GameManager implements Menu {
 		COUNT_DOWN -= (int) deltaTime;
 
 		if (lives > 0) {
+			
+			// can spawn new entity
 			if (COUNT_DOWN <= 0) {
 				score += 5; // increase score with time
-
-				COUNT_DOWN = Math.max(Variabelen.SPAWN_SPEED - score, 300);
+				
+				//Chances of spawning for every entity
+				COUNT_DOWN = Math.max(Variabelen.SPAWN_SPEED - (int)(0.15  * score), 150);
 				int chance = Variabelen.RANDOM.nextInt(86);
 				if (chance < 40)
 					getNewEntity(ROCK_ID);
@@ -219,6 +222,7 @@ public class GameManager implements Menu {
 					getNewEntity(GreatROCK_ID);
 			}
 
+			// Give update to all entities
 			player.setDifficulity(score);
 			player.onUpdate(deltaTime);
 			for (int id = 0; id < activeEntity.size(); id++) {

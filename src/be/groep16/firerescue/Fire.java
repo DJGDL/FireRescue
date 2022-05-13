@@ -10,10 +10,14 @@ import javax.imageio.ImageIO;
 
 public class Fire implements Entity {
 	private static BufferedImage image;
-	private static final int YFire1 = -Variabelen.HoogteFire;
-	private static final int YFire2 = 0;
-	private static final int sourceXFire2 = 548;
-	private static final int sourceYFire2 = 720;
+	
+	public static final int BREEDTE_FIRE = 33;
+	public static final int HOOGTE_FIRE = 43;
+	
+	private static final int Y_FIRE_1 = -HOOGTE_FIRE;
+	private static final int Y_FIRE_2 = 0;
+	private static final int SOURCE_X_FIRE_2 = 548;
+	private static final int SOURCE_Y_FIRE_2 = 720;
 
 	private int xFire1 = 0;
 	private int xFire2 = 0;
@@ -24,7 +28,7 @@ public class Fire implements Entity {
 		reset(0);
 
 		if (image == null) {
-			// File fire = new File("Vuurbal.png");
+			// Loading new fire image
 			URL fire = getClass().getResource("Vuurbal.png");
 
 			try {
@@ -44,31 +48,31 @@ public class Fire implements Entity {
 
 	@Override
 	public void onDraw(Graphics g) {
-		g.drawImage(image, xFire1 + (int) (positie.getX()), YFire1 + (int) (positie.getY()),
-				xFire2 + (int) (positie.getX()), YFire2 + (int) (positie.getY()), Variabelen.sourceX1,
-				Variabelen.sourceY1, sourceXFire2, sourceYFire2, null);
+		g.drawImage(image, xFire1 + (int) (positie.getX()), Y_FIRE_1 + (int) (positie.getY()),
+				xFire2 + (int) (positie.getX()), Y_FIRE_2 + (int) (positie.getY()), Variabelen.SOURCE_X1,
+				Variabelen.SOURCE_Y1, SOURCE_X_FIRE_2, SOURCE_Y_FIRE_2, null);
 
 	}
 
 	@Override
 	public void reset(float difficulty) {
-		xFire1 = Variabelen.RANDOM.nextInt(Variabelen.BreedteScherm - Variabelen.BreedteFire);
-		xFire2 = xFire1 + Variabelen.BreedteFire;
+		xFire1 = Variabelen.RANDOM.nextInt(Variabelen.BREEDTE_SCHERM - BREEDTE_FIRE);
+		xFire2 = xFire1 + BREEDTE_FIRE;
 
 		positie = new Vector(0, 0);
-		velocity = Math.min(1.5f + 0.00065f * difficulty, 8);
+		velocity = Math.min(1.5f + 0.000525f * difficulty, 12);
 	}
 
 	@Override
 	public boolean isDead() {
-		return positie.getY() > Variabelen.HoogteScherm + 1;
+		return positie.getY() > Variabelen.HOOGTE_SCHERM + 1;
 	}
 
 	@Override
 	public Rectangle getBoundingBox() {
-		Rectangle r = new Rectangle(Variabelen.BreedteFire / 3, (Variabelen.HoogteFire * 3) / 5);
-		r.x = xFire1 + Variabelen.BreedteFire / 3;
-		r.y = YFire1 + (int) ((Variabelen.HoogteFire * 2) / 5) + (int) positie.getY();
+		Rectangle r = new Rectangle(BREEDTE_FIRE / 3, (HOOGTE_FIRE * 3) / 5);
+		r.x = xFire1 + BREEDTE_FIRE / 3;
+		r.y = Y_FIRE_1 + (int) ((HOOGTE_FIRE * 2) / 5) + (int) positie.getY();
 
 		return r;
 	}

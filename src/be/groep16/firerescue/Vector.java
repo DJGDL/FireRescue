@@ -1,5 +1,10 @@
 package be.groep16.firerescue;
 
+/**
+ * Calculating with vector's
+ * @author rapha
+ *
+ */
 public class Vector {
 	private float x;
 	private float y;

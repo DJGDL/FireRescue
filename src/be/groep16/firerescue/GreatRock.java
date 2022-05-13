@@ -10,11 +10,14 @@ import javax.imageio.ImageIO;
 
 public class GreatRock implements Entity {
 	private static BufferedImage image;
+	
+	public static final int BREEDTE_GREAT_ROCK = 99;
+	public static final int HOOGTE_GREAT_ROCK = 99;
 
-	public static final int YRock1 = -Variabelen.HoogteRock * 2;
-	public static final int YRock2 = 0;
-	public static final int sourceXRock2 = 1378;
-	public static final int sourceYRock2 = 1378;
+	public static final int Y_GREAT_ROCK_1 = -HOOGTE_GREAT_ROCK * 2;
+	public static final int Y_GREAT_ROCK_2 = 0;
+	public static final int SOURCE_X_GREAT_Rock_2 = 1378;
+	public static final int SOURCE_Y_GEAT_ROCK_2 = 1378;
 
 	private int xRock1 = 0;
 	private int xRock2 = 0;
@@ -25,7 +28,7 @@ public class GreatRock implements Entity {
 		reset(0);
 
 		if (image == null) {
-			// File greatRock = new File("Steen.png");
+			// Loading new GreatRock image
 			URL greatRock = getClass().getResource("Steen.png");
 
 			try {
@@ -44,31 +47,31 @@ public class GreatRock implements Entity {
 
 	@Override
 	public void onDraw(Graphics g) {
-		g.drawImage(image, xRock1 + (int) (positie.getX()), YRock1 + (int) (positie.getY()),
-				xRock2 + (int) (positie.getX()), YRock2 + (int) (positie.getY()), Variabelen.sourceX1,
-				Variabelen.sourceY1, sourceXRock2, sourceYRock2, null);
+		g.drawImage(image, xRock1 + (int) (positie.getX()), Y_GREAT_ROCK_1 + (int) (positie.getY()),
+				xRock2 + (int) (positie.getX()), Y_GREAT_ROCK_2 + (int) (positie.getY()), Variabelen.SOURCE_X1,
+				Variabelen.SOURCE_Y1, SOURCE_X_GREAT_Rock_2, SOURCE_Y_GEAT_ROCK_2, null);
 
 	}
 
 	@Override
 	public void reset(float difficulty) {
-		xRock1 = Variabelen.RANDOM.nextInt(Variabelen.BreedteScherm - (Variabelen.BreedteRock * 2));
-		xRock2 = xRock1 + Variabelen.BreedteRock * 2;
+		xRock1 = Variabelen.RANDOM.nextInt(Variabelen.BREEDTE_SCHERM - (BREEDTE_GREAT_ROCK * 2));
+		xRock2 = xRock1 + BREEDTE_GREAT_ROCK * 2;
 
 		positie = new Vector(0, 0);
-		velocity = Math.min(1f + 0.0003f * difficulty, 4);
+		velocity = Math.min(1f + 0.00025f * difficulty, 6);
 	}
 
 	@Override
 	public boolean isDead() {
-		return positie.getY() > Variabelen.HoogteScherm + 1;
+		return positie.getY() > Variabelen.HOOGTE_SCHERM + 1;
 	}
 
 	@Override
 	public Rectangle getBoundingBox() {
-		Rectangle r = new Rectangle((int) ((Variabelen.BreedteRock * 4) / 5), (int) ((Variabelen.HoogteRock * 4) / 5));
-		r.x = xRock1 + (int) ((Variabelen.BreedteRock * 6) / 10) + (int) positie.getX();
-		r.y = YRock1 + (int) ((Variabelen.HoogteRock * 6) / 10) + (int) positie.getY();
+		Rectangle r = new Rectangle((int) ((BREEDTE_GREAT_ROCK * 4) / 5), (int) ((HOOGTE_GREAT_ROCK * 4) / 5));
+		r.x = xRock1 + (int) ((BREEDTE_GREAT_ROCK * 6) / 10) + (int) positie.getX();
+		r.y = Y_GREAT_ROCK_1 + (int) ((HOOGTE_GREAT_ROCK * 6) / 10) + (int) positie.getY();
 
 		return r;
 	}

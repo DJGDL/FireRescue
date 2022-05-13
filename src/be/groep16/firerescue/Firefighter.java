@@ -17,13 +17,16 @@ public class Firefighter implements Entity {
 
 	private boolean keyLeft = false;
 	private boolean keyRight = false;
+	
+	public static final int BREEDTE_FIREFIGHTER = 56;
+	public static final int HOOGTE_FIREFIGHTER = 100;
 
-	public int XFirefighter1 = Variabelen.BreedteScherm / 2 - Variabelen.BreedteFirefighter / 2;
-	public int XFirefighter2 = Variabelen.BreedteScherm / 2 + Variabelen.BreedteFirefighter / 2;
-	public static final int YFirefighter1 = Variabelen.HoogteScherm - Variabelen.HoogteFirefighter;
-	public static final int YFirefighter2 = Variabelen.HoogteScherm;
-	public static final int sourceXFirefighter2 = 57;
-	public static final int sourceYFirefighter2 = 100;
+	public int xFirefighter1 = Variabelen.BREEDTE_SCHERM / 2 - BREEDTE_FIREFIGHTER / 2;
+	public int xFirefighter2 = Variabelen.BREEDTE_SCHERM / 2 + BREEDTE_FIREFIGHTER / 2;
+	public static final int Y_FIREFIGHTER_1 = Variabelen.HOOGTE_SCHERM - HOOGTE_FIREFIGHTER;
+	public static final int Y_FIREFIGHTER_2 = Variabelen.HOOGTE_SCHERM;
+	public static final int SOURCE_X_FIREFIGHTER_2 = 57;
+	public static final int SOURCE_Y_FIREFIGHTER_2 = 100;
 
 	public boolean direction = true; // true --> firefighter looks right
 
@@ -31,9 +34,9 @@ public class Firefighter implements Entity {
 		positie = new Vector(0, 0);
 
 		setDifficulity(0); // sets speed with 0 difficulity
-		boundingBox = new Rectangle(Variabelen.BreedteFirefighter - 20, Variabelen.HoogteFirefighter);
+		boundingBox = new Rectangle(BREEDTE_FIREFIGHTER - 20, HOOGTE_FIREFIGHTER);
 
-		// File firefighter = new File("brandweerman.png");
+		// Loading new firefighter image
 		URL firefighter = getClass().getResource("brandweerman.png");
 
 		try {
@@ -45,18 +48,18 @@ public class Firefighter implements Entity {
 
 	@Override
 	public void onUpdate(long deltaTime) {
-		if (keyRight && positie.getX() < ((Variabelen.BreedteScherm / 2) - (Variabelen.BreedteFirefighter / 2)))
+		if (keyRight && positie.getX() < ((Variabelen.BREEDTE_SCHERM / 2) - (BREEDTE_FIREFIGHTER / 2)))
 			positie = positie.add(speed * deltaTime / 10, 0);
 
-		if (keyLeft && positie.getX() > boundingBox.getWidth() - 5 - Variabelen.BreedteScherm / 2)
+		if (keyLeft && positie.getX() > boundingBox.getWidth() - 5 - Variabelen.BREEDTE_SCHERM / 2)
 			positie = positie.add(-speed * deltaTime / 10, 0);
 
 		if (direction) {
-			boundingBox.x = XFirefighter1 + 20 + (int) positie.getX();
-			boundingBox.y = YFirefighter1 + (int) positie.getY();
+			boundingBox.x = xFirefighter1 + 20 + (int) positie.getX();
+			boundingBox.y = Y_FIREFIGHTER_1 + (int) positie.getY();
 		} else {
-			boundingBox.x = XFirefighter1 + (int) positie.getX();
-			boundingBox.y = YFirefighter1 + (int) positie.getY();
+			boundingBox.x = xFirefighter1 + (int) positie.getX();
+			boundingBox.y = Y_FIREFIGHTER_1 + (int) positie.getY();
 		}
 
 	}
@@ -84,22 +87,16 @@ public class Firefighter implements Entity {
 	@Override
 	public void onDraw(Graphics g) {
 		if (direction) {
-			g.drawImage(image, XFirefighter1 + (int) (positie.getX()), YFirefighter1 + (int) (positie.getY()),
-					XFirefighter2 + (int) (positie.getX()), YFirefighter2 + (int) (positie.getY()), Variabelen.sourceX1,
-					Variabelen.sourceY1, sourceXFirefighter2, sourceYFirefighter2, null);
+			g.drawImage(image, xFirefighter1 + (int) (positie.getX()), Y_FIREFIGHTER_1 + (int) (positie.getY()),
+					xFirefighter2 + (int) (positie.getX()), Y_FIREFIGHTER_2 + (int) (positie.getY()), Variabelen.SOURCE_X1,
+					Variabelen.SOURCE_Y1, SOURCE_X_FIREFIGHTER_2, SOURCE_Y_FIREFIGHTER_2, null);
 
 		} else {
-			g.drawImage(image, XFirefighter2 + (int) (positie.getX()), YFirefighter1 + (int) (positie.getY()),
-					XFirefighter1 + (int) (positie.getX()), YFirefighter2 + (int) (positie.getY()), Variabelen.sourceX1,
-					Variabelen.sourceY1, sourceXFirefighter2, sourceYFirefighter2, null);
+			g.drawImage(image, xFirefighter2 + (int) (positie.getX()), Y_FIREFIGHTER_1 + (int) (positie.getY()),
+					xFirefighter1 + (int) (positie.getX()), Y_FIREFIGHTER_2 + (int) (positie.getY()), Variabelen.SOURCE_X1,
+					Variabelen.SOURCE_Y1, SOURCE_X_FIREFIGHTER_2, SOURCE_Y_FIREFIGHTER_2, null);
 		}
 	}
-
-	/**
-	 * We dont have a live :)
-	 * 
-	 * @return My lives
-	 */
 
 	@Override
 	public Rectangle getBoundingBox() {
@@ -111,7 +108,7 @@ public class Firefighter implements Entity {
 	}
 
 	public void reset(float difficulty) {
-		XFirefighter1 = Variabelen.BreedteScherm / 2 - Variabelen.BreedteFirefighter / 2;
-		XFirefighter2 = Variabelen.BreedteScherm / 2 + Variabelen.BreedteFirefighter / 2;
+		xFirefighter1 = Variabelen.BREEDTE_SCHERM / 2 - BREEDTE_FIREFIGHTER / 2;
+		xFirefighter2 = Variabelen.BREEDTE_SCHERM / 2 + BREEDTE_FIREFIGHTER / 2;
 	}
 }

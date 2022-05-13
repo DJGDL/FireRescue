@@ -36,10 +36,10 @@ public class Building implements Entity {
 
 	@Override
 	public void onDraw(Graphics g) {
-		g.drawImage(image, Variabelen.XBuilding1 + (int) (positie.getX()),
-				Variabelen.YBuilding1 + (int) (positie.getY()), Variabelen.XBuilding2 + (int) (positie.getX()),
-				Variabelen.YBuilding2 + (int) (positie.getY()), Variabelen.sourceX1, Variabelen.sourceY1,
-				Variabelen.sourceXBuilding2, Variabelen.sourceYBuilding2, null);
+		g.drawImage(image, Variabelen.X_BUILDING_1 + (int) (positie.getX()),
+				Variabelen.Y_BUILDING_1 + (int) (positie.getY()), Variabelen.X_BUILDING_2 + (int) (positie.getX()),
+				Variabelen.Y_BUILDING_2 + (int) (positie.getY()), Variabelen.SOURCE_X1, Variabelen.SOURCE_Y1,
+				Variabelen.SOURCE_X_BUILDING_2, Variabelen.SOURCE_Y_BUILDING_2, null);
 
 	}
 

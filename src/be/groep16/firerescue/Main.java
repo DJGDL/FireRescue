@@ -6,18 +6,24 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+/**
+ * Start of timer
+ * Call of Menumanager
+ * Makes a JFrame
+ * @author rapha
+ *
+ */
 @SuppressWarnings("serial")
 public class Main extends JPanel implements ActionListener {
 	private Timer timer;
 	private long prevTime = 0;
 	private MenuManager menuManager;
 
-	JLabel Score;
-	JLabel Lives;
+	//JLabel Score;
+	//JLabel Lives;
 
 	public Main() {
 		menuManager = new MenuManager();
@@ -49,11 +55,11 @@ public class Main extends JPanel implements ActionListener {
 		 * Lives.setBounds(Variabelen.BreedteScherm - 80, 5, 75, 35);
 		 */
 
-		frame.setMinimumSize(new Dimension(Variabelen.BreedteScherm, Variabelen.HoogteScherm));
+		frame.setMinimumSize(new Dimension(Variabelen.BREEDTE_SCHERM, Variabelen.HOOGTE_SCHERM));
 		frame.setResizable(false);
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		mainPanel.setPreferredSize(new Dimension(Variabelen.BreedteScherm, Variabelen.HoogteScherm));
+		mainPanel.setPreferredSize(new Dimension(Variabelen.BREEDTE_SCHERM, Variabelen.HOOGTE_SCHERM));
 		/*
 		 * 
 		 * mainPanel.add(Score); mainPanel.add(Lives); mainPanel.setLayout(null);

@@ -33,9 +33,12 @@ public class StartMenu implements Menu {
 
 	private final ArrayList<Integer> highScores;
 
+	/**
+	 * Start of start-screen music
+	 * Making list of highScores
+	 */
 	public StartMenu() {
 		playMusic();
-		// reset(0);
 		highScores = new ArrayList<>();
 		if (Variabelen.DEBUG_MODE) {
 			for (int i = 0; i < 4; i++) {
@@ -44,7 +47,7 @@ public class StartMenu implements Menu {
 		}
 
 		if (image == null) {
-			// File startMenu = new File("StartPage.png");
+			// Loading new StartPage image
 			URL startMenu = getClass().getResource("StartPage.png");
 
 			try {
@@ -57,8 +60,6 @@ public class StartMenu implements Menu {
 
 	private void playMusic() {
 		URL soundFile = getClass().getResource("StartSchermMuziek2.wav");
-		// File soundFile = new
-		// File(getClass().getResource("StartSchermMuziek.wav").getFile());
 		try {
 			music = AudioSystem.getClip();
 			AudioInputStream inputStream = AudioSystem.getAudioInputStream(soundFile);
@@ -81,14 +82,14 @@ public class StartMenu implements Menu {
 	@Override
 	public void onDraw(Graphics g) {
 		g.setColor(Color.white);
-		g.drawImage(image, 0, 0, Variabelen.BreedteScherm, Variabelen.HoogteScherm, 0, 0, srcX2, srcY2, null);
+		g.drawImage(image, 0, 0, Variabelen.BREEDTE_SCHERM, Variabelen.HOOGTE_SCHERM, 0, 0, srcX2, srcY2, null);
 		g.setFont(myFont1);
-		g.drawString("Press Space to start", Variabelen.BreedteScherm / 3, Variabelen.HoogteScherm / 3);
+		g.drawString("Press Space to start", Variabelen.BREEDTE_SCHERM / 3, Variabelen.HOOGTE_SCHERM / 3);
 		g.setFont(myFont2);
-		g.drawString("Brandweerman Tom", Variabelen.BreedteScherm / 10, Variabelen.HoogteScherm / 4);
+		g.drawString("Brandweerman Tom", Variabelen.BREEDTE_SCHERM / 10, Variabelen.HOOGTE_SCHERM / 4);
 		for (int i = 0; i < highScores.size(); i++) {
-			g.drawString((i + 1) + ") " + highScores.get(i), Variabelen.BreedteScherm / 3,
-					Variabelen.HoogteScherm / 2 + i * 40);
+			g.drawString((i + 1) + ") " + highScores.get(i), Variabelen.BREEDTE_SCHERM / 3,
+					Variabelen.HOOGTE_SCHERM / 2 + i * 40);
 		}
 	}
 

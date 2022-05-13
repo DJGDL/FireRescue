@@ -4,6 +4,11 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 
+/**
+ * Changes between startmenu and gameManager
+ * @author rapha
+ *
+ */
 public class MenuManager implements Menu {
 	private Menu activeMenu;
 	private final GameManager gameManager;

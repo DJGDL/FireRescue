@@ -10,14 +10,17 @@ import javax.imageio.ImageIO;
 
 public class GoldenDroplet implements Entity {
 	private static BufferedImage image = null;
+	
+	public static final int BREEDTE_GOLDEN_DROPLET = 33;
+	public static final int HOOGTE_GOLDEN_DROPLET = 33;
 
-	private static final int YSmileDroplet1 = -Variabelen.HoogteDroplet;
-	private static final int YSmileDroplet2 = 0;
-	private static final int sourceXSmileDroplet2 = 260;
-	private static final int sourceYSmileDroplet2 = 280;
+	private static final int Y_GOLDEN_DROPLET_1 = -HOOGTE_GOLDEN_DROPLET;
+	private static final int Y_GOLDEN_DROPLET_2 = 0;
+	private static final int SOURCE_X_GOLDEN_DROPLET_2 = 260;
+	private static final int SOURCE_Y_GOLDEN_DROPLET_2 = 280;
 
-	private int xSmileDroplet1 = 0;
-	private int xSmileDroplet2 = 0;
+	private int xGoldenDroplet1 = 0;
+	private int xGoldenDroplet2 = 0;
 	private Vector positie;
 	private float velocity;
 
@@ -25,7 +28,7 @@ public class GoldenDroplet implements Entity {
 		reset(0);
 
 		if (image == null) {
-			// File goldenDroplet = new File("GoldenDroplet.png");
+			// Loading new GoldenDroplet image
 			URL goldenDroplet = getClass().getResource("GoldenDroplet.png");
 
 			try {
@@ -43,31 +46,31 @@ public class GoldenDroplet implements Entity {
 
 	@Override
 	public void onDraw(Graphics g) {
-		g.drawImage(image, xSmileDroplet1 + (int) (positie.getX()), YSmileDroplet1 + (int) (positie.getY()),
-				xSmileDroplet2 + (int) (positie.getX()), YSmileDroplet2 + (int) (positie.getY()), Variabelen.sourceX1,
-				Variabelen.sourceY1, sourceXSmileDroplet2, sourceYSmileDroplet2, null);
+		g.drawImage(image, xGoldenDroplet1 + (int) (positie.getX()), Y_GOLDEN_DROPLET_1 + (int) (positie.getY()),
+				xGoldenDroplet2 + (int) (positie.getX()), Y_GOLDEN_DROPLET_2 + (int) (positie.getY()), Variabelen.SOURCE_X1,
+				Variabelen.SOURCE_Y1, SOURCE_X_GOLDEN_DROPLET_2, SOURCE_Y_GOLDEN_DROPLET_2, null);
 
 	}
 
 	@Override
 	public void reset(float difficulty) {
-		xSmileDroplet1 = Variabelen.RANDOM.nextInt(Variabelen.BreedteScherm - Variabelen.BreedteDroplet);
-		xSmileDroplet2 = xSmileDroplet1 + Variabelen.BreedteDroplet;
+		xGoldenDroplet1 = Variabelen.RANDOM.nextInt(Variabelen.BREEDTE_SCHERM - BREEDTE_GOLDEN_DROPLET);
+		xGoldenDroplet2 = xGoldenDroplet1 + BREEDTE_GOLDEN_DROPLET;
 
 		positie = new Vector(0, 0);
-		velocity = Math.min(1.5f + 0.00055f * difficulty, 7);
+		velocity = Math.min(1.5f + 0.000475f * difficulty, 11);
 	}
 
 	@Override
 	public boolean isDead() {
-		return positie.getY() > Variabelen.HoogteScherm + 1;
+		return positie.getY() > Variabelen.HOOGTE_SCHERM + 1;
 	}
 
 	@Override
 	public Rectangle getBoundingBox() {
-		Rectangle r = new Rectangle(Variabelen.BreedteDroplet, Variabelen.HoogteDroplet);
-		r.x = xSmileDroplet1 + (int) positie.getX();
-		r.y = YSmileDroplet1 + (int) positie.getY();
+		Rectangle r = new Rectangle(BREEDTE_GOLDEN_DROPLET, HOOGTE_GOLDEN_DROPLET);
+		r.x = xGoldenDroplet1 + (int) positie.getX();
+		r.y = Y_GOLDEN_DROPLET_1 + (int) positie.getY();
 
 		return r;
 	}

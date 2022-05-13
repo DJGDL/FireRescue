@@ -18,7 +18,7 @@ public class Building implements Entity {
 		positie = new Vector(0, 0);
 		r = new Rectangle(0, 0);
 
-		// File building = new File("gebouw.png");
+		// Loading new building image
 		URL building = getClass().getResource("gebouw.png");
 
 		try {

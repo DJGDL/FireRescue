@@ -25,7 +25,7 @@ public class Droplet implements Entity {
 		reset(0);
 
 		if (image == null) {
-			// File droplet = new File("Druppel.png");
+			// Loading new Droplet image
 			URL droplet = getClass().getResource("Druppel.png");
 
 			try {
